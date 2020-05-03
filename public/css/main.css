@@ -1,0 +1,45 @@
+:root {
+    --primary: #30475e;
+    --secondary: #00909e;
+}
+
+html,
+body {
+    display: grid;
+    margin: 0;
+    grid-template-rows: 48px auto 48px;
+    height: 100vh;
+    width: 100vw;
+}
+main {
+    padding: 52px;
+}
+/* #page-content {
+    flex: 1 0 auto;
+} */
+
+/* .sticky-footer {
+    flex-shrink: none;
+    position: fixed;
+} */
+
+/* Other Classes for Page Styling */
+.selected {
+    background: #00909e;
+}
+body {
+    background: var(--primary);
+
+    /* background: linear-gradient(to right, #0062e6, #33aeff); */
+}
+.includes {
+    background: var(--secondary);
+}
+
+.nav-link {
+    color: #fff;
+}
+.btn {
+    background: var(--primary);
+    color: #fff;
+}
