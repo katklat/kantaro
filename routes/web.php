@@ -17,7 +17,10 @@ use SpotifyWebAPI\SpotifyWebAPI;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 Route::get('/lists', function () {
     return view('lists.index');
-});
+})->name('lists.index');
+Route::get('/lists/1', function () {
+    return view('lists.show');
+})->name('lists.show');

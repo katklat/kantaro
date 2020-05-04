@@ -6,13 +6,12 @@
 html,
 body {
     display: grid;
-    margin: 0;
     grid-template-rows: 48px auto 48px;
     height: 100vh;
     width: 100vw;
 }
 main {
-    padding: 52px;
+    padding: 52px 20px;
     color: var(--secondary);
 }
 
@@ -45,4 +44,22 @@ footer {
 }
 .inline {
     display: inline-block;
+}
+.card-icon {
+    font-size: 32px;
+    padding: 0 4px;
+}
+.scroll-card {
+    overflow-y: scroll;
+    height: 200px;
+    padding: 1rem;
+}
+.avatar-icon {
+    font-size: 80px;
+    padding: 0 4px;
+}
+.card-image__round {
+    font-size: 100px;
+    border-radius: 120px;
+    border-color: darkblue;
 }
