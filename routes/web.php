@@ -18,3 +18,6 @@ use SpotifyWebAPI\SpotifyWebAPI;
 Route::get('/', function () {
     return view('home');
 });
+Route::get('/lists', function () {
+    return view('lists.index');
+});
