@@ -27,6 +27,9 @@ body {
     filter: invert(33%) sepia(85%) saturate(1127%) hue-rotate(153deg)
         brightness(100%) contrast(101%);
 }
+.filter-white {
+    filter: invert(100%);
+}
 .inline {
     display: inline-block;
 }

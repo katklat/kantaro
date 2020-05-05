@@ -2,7 +2,7 @@
     <div class="header fixed-top">
         <div class="container d-flex">
             <a href="{{route('lists.index')}}"> <img src="/images/back.svg" class="filter-primary inline" width="44" height="44" title="add" alt=""> </a>
-            @if (!Request::is('*create'))
+            @if (!Request::is('*create*'))
 
             <a href="{{route('lists.create')}}"> <img src="/images/plus.svg" class="filter-primary inline mt-1 mr-2" width="36" height="36" title="add" alt=""></a>
 

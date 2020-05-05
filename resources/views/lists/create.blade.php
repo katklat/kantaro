@@ -34,7 +34,7 @@
         </div>
         <div class="mt-6">
             <a class="btn btn_cancel " href="{{ route('lists.index') }}">Cancel</a>
-            <a class="btn ml-2" href="{{ route('lists.success') }}"> Save </a>
+            <a class="btn ml-2" href="{{ route('lists.create.success') }}"> Save </a>
             <!-- <button class="btn ml-2" type="submit">Save</button> -->
         </div>
     </form>

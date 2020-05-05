@@ -27,6 +27,6 @@ Route::get('/lists/1', function () {
 Route::get('/lists/create', function () {
     return view('lists.create');
 })->name('lists.create');
-Route::get('/lists/success', function () {
+Route::get('/lists/create/success', function () {
     return view('lists.success');
-})->name('lists.success');
+})->name('lists.create.success');
