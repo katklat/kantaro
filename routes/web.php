@@ -30,3 +30,9 @@ Route::get('/lists/create', function () {
 Route::get('/lists/create/success', function () {
     return view('lists.success');
 })->name('lists.create.success');
+Route::get('/lists/add', function () {
+    return view('lists.add');
+})->name('lists.add');
+Route::get('/lists/tools', function () {
+    return view('lists.tools');
+})->name('lists.tools');

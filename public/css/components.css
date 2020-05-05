@@ -2,6 +2,10 @@ h2 {
     color: #fff;
 }
 
+input[type="checkbox"] {
+    display: none;
+}
+
 .card-icon {
     font-size: 32px;
     padding: 0 4px;
@@ -14,12 +18,31 @@ h2 {
 
 .btn {
     background: var(--secondary);
+    border: none;
     color: #fff;
 }
 .btn_cancel {
     background: #555;
     color: #fff;
 }
-.form-group {
-    margin: 20px 0;
+
+.tools__dropdown {
+    padding: 1rem 1rem;
+}
+.dropdown__hidden {
+    max-height: 0;
+
+    overflow: hidden;
+    transition: max-height 0.25s ease-in-out;
+}
+.dropdown__toggle:checked + .dropdown__label + .dropdown__hidden {
+    max-height: 100vh;
+}
+
+.dropdown__toggle:checked + .dropdown__label::after {
+    transform: rotate(90deg) translateX(-3px);
+}
+.dropdown__toggle:checked + .dropdown__label {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
 }

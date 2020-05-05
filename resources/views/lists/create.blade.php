@@ -5,7 +5,7 @@
 
 
     <form method="GET">
-        <div class="form-group">
+        <div class="form-group mt-4">
             <label for="name">give it a name</label>
             <input type="text" class="form-control" id="name" placeholder="Enter name">
         </div>
