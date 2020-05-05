@@ -36,3 +36,6 @@ Route::get('/lists/add', function () {
 Route::get('/lists/tools', function () {
     return view('lists.tools');
 })->name('lists.tools');
+Route::get('/songs', function () {
+    return view('songs.index');
+})->name('songs.index');

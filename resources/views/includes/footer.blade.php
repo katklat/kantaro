@@ -6,7 +6,7 @@
             <a class="nav-link selected" data-toggle="tab" href="{{route('lists.index')}}"> Lists</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#"> Songs</a>
+            <a class="nav-link" data-toggle="tab" href="{{route('songs.index')}}"> Songs</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#"> Tools</a>
