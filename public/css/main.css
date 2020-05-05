@@ -33,3 +33,8 @@ body {
 .inline {
     display: inline-block;
 }
+
+hr {
+    height: 1px;
+    background-color: var(--secondary);
+}
