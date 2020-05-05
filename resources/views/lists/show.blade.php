@@ -6,7 +6,7 @@
 
 
         <div class="card my-4">
-            <div class="card-body text-left scroll-card">
+            <div class="card-body card-scroll text-left ">
                 <h4 class="card-title">Some List<h4>
                         <h6 class="card-subtitle mb-2">May 2020, Hamburg</h6>
                         <p class="card-text"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque aliquam suscipit nobis odio error saepe, et ipsam labore, delectus asperiores quas sint quidem deserunt placeat consequatur quos, voluptate illum architecto?

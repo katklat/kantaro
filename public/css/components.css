@@ -1,0 +1,25 @@
+h2 {
+    color: #fff;
+}
+
+.card-icon {
+    font-size: 32px;
+    padding: 0 4px;
+}
+.card-scroll {
+    overflow-y: scroll;
+    height: 200px;
+    padding: 1rem;
+}
+
+.btn {
+    background: var(--secondary);
+    color: #fff;
+}
+.btn_cancel {
+    background: #555;
+    color: #fff;
+}
+.form-group {
+    margin: 20px 0;
+}
