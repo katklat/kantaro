@@ -24,3 +24,18 @@ Route::get('/lists', function () {
 Route::get('/lists/1', function () {
     return view('lists.show');
 })->name('lists.show');
+Route::get('/lists/create', function () {
+    return view('lists.create');
+})->name('lists.create');
+Route::get('/lists/create/success', function () {
+    return view('lists.success');
+})->name('lists.create.success');
+Route::get('/lists/add', function () {
+    return view('lists.add');
+})->name('lists.add');
+Route::get('/lists/tools', function () {
+    return view('lists.tools');
+})->name('lists.tools');
+Route::get('/songs', function () {
+    return view('songs.index');
+})->name('songs.index');

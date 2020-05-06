@@ -15,25 +15,10 @@ main {
     color: var(--secondary);
 }
 
-.selected {
-    background: #00909e;
-}
 body {
     background: var(--primary);
 }
-footer {
-    background: var(--primary);
-}
-.includes {
-    background: var(--secondary);
-}
-.nav-link {
-    color: #fff;
-}
-.btn {
-    background: var(--primary);
-    color: #fff;
-}
+
 .filter-primary {
     filter: invert(26%) sepia(6%) saturate(3150%) hue-rotate(170deg)
         brightness(94%) contrast(93%);
@@ -42,24 +27,14 @@ footer {
     filter: invert(33%) sepia(85%) saturate(1127%) hue-rotate(153deg)
         brightness(100%) contrast(101%);
 }
+.filter-white {
+    filter: invert(100%);
+}
 .inline {
     display: inline-block;
 }
-.card-icon {
-    font-size: 32px;
-    padding: 0 4px;
-}
-.scroll-card {
-    overflow-y: scroll;
-    height: 200px;
-    padding: 1rem;
-}
-.avatar-icon {
-    font-size: 80px;
-    padding: 0 4px;
-}
-.card-image__round {
-    font-size: 100px;
-    border-radius: 120px;
-    border-color: darkblue;
+
+hr {
+    height: 1px;
+    background-color: var(--secondary);
 }

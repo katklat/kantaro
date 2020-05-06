@@ -4,19 +4,7 @@
 <main>
     <div class="container text-center">
 
-
-        <div class="card my-4">
-            <div class="card-body card-scroll text-left ">
-                <h4 class="card-title">Some List<h4>
-                        <h6 class="card-subtitle mb-2">May 2020, Hamburg</h6>
-                        <p class="card-text"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque aliquam suscipit nobis odio error saepe, et ipsam labore, delectus asperiores quas sint quidem deserunt placeat consequatur quos, voluptate illum architecto?
-                        </p>
-            </div>
-            <div class="card-footer p-0 justify-content-around">
-                <span class="card-icon">🔥</span>
-                <span class="card-icon">🦊</span>
-            </div>
-        </div>
+        <h2 class="m-3 inline">My Songs</h2>
 
         <div class="card mb-4">
             <img class="card-img-top" src="{{ asset('images/landscape.jpg') }}" alt="">
@@ -27,7 +15,7 @@
                         <h6 class="card-subtitle mb-2 text-muted">by someone</h6>
                     </div>
                     <div class="col-3">
-                        <span class="card-icon">☕️</span>
+                        <span class="card-icon">🍔</span>
                     </div>
                 </div>
                 <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio, iusto. </p>
@@ -43,7 +31,7 @@
                         <h6 class="card-subtitle mb-2 text-muted">by someone</h6>
                     </div>
                     <div class="col-3">
-                        <span class="card-icon">🍯</span>
+                        <span class="card-icon">🧶</span>
                     </div>
                 </div>
                 <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio, iusto. </p>
@@ -59,7 +47,7 @@
                         <h6 class="card-subtitle mb-2 text-muted">by someone</h6>
                     </div>
                     <div class="col-3">
-                        <span class="card-icon">🦠</span>
+                        <span class="card-icon">🐍</span>
                     </div>
                 </div>
                 <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio, iusto. </p>
