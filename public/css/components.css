@@ -12,8 +12,12 @@ input[type="checkbox"] {
 }
 .card-scroll {
     overflow-y: scroll;
-    height: 200px;
+    height: 180px;
     padding: 1rem;
+}
+.card-title,
+.card-text {
+    color: var(--secondary);
 }
 
 .btn {
@@ -25,6 +29,9 @@ input[type="checkbox"] {
     background: #555;
     color: #fff;
 }
+/* .btn-edit {
+    background: none;
+} */
 
 .tools__dropdown {
     padding: 1rem 1rem;
@@ -45,4 +52,9 @@ input[type="checkbox"] {
 .dropdown__toggle:checked + .dropdown__label {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
+}
+.edit__link {
+    color: #ffffff;
+    text-align: right;
+    padding: 10px 0;
 }
