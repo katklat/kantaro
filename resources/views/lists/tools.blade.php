@@ -8,14 +8,14 @@
         <div class="tools__dropdown">
 
             <input id="tools__dropdown1" class="dropdown__toggle" type="checkbox">
-            <label for="tools__dropdown1" class="dropdown__label"><img src="/images/upload.svg" class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Upload list to Spotify</label>
+            <label for="tools__dropdown1" class="dropdown__label"><img src={{ asset('images/upload.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Upload list to Spotify</label>
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
                     <div class="form-group">
                         <label for="spotify_name">name your Spotify playlist</label>
                         <input type="text" class="form-control" id="spotify_name" placeholder="Enter name">
                         <p class="mt-3">This upload will create a new playlist within your Spotify account using the song titles. It will not share photos and other information from this app. </p>
-                        <a class="btn" href="#}"> Upload </a>
+                        <a class="btn" href="#}">Upload</a>
                     </div>
                 </div>
             </div>
@@ -24,12 +24,11 @@
         <form>
             <div class="tools__dropdown">
                 <input id="tools__dropdown2" class="dropdown__toggle" type="checkbox">
-                <label for="tools__dropdown2" class="dropdown__label"><img src="/images/tag.svg" class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Change name</label>
+                <label for="tools__dropdown2" class="dropdown__label"><img src={{ asset('images/tag.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Change name</label>
                 <div class="dropdown__hidden">
                     <div class="dropdown__content">
 
                         <div class="form-group">
-                            <label for="name">give it a name</label>
                             <input type="text" class="form-control" id="name" placeholder="Enter name">
                         </div>
 
@@ -39,12 +38,11 @@
 
             <div class="tools__dropdown">
                 <input id="tools__dropdown3" class="dropdown__toggle" type="checkbox">
-                <label for="tools__dropdown3" class="dropdown__label"><img src="/images/calendar.svg" class="filter-secondary inline mr-2" width="28" height="28" title="add" alt=""></i>Change date</label>
+                <label for="tools__dropdown3" class="dropdown__label"><img src={{ asset('images/calendar.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="add" alt=""></i>Change date</label>
                 <div class="dropdown__hidden">
                     <div class="dropdown__content">
 
                         <div class="form-group">
-                            <label for="date">enter a date</label>
                             <input type="text" class="form-control" id="date" placeholder="Enter date">
                         </div>
 
@@ -54,12 +52,11 @@
 
             <div class="tools__dropdown">
                 <input id="tools__dropdown4" class="dropdown__toggle" type="checkbox">
-                <label for="tools__dropdown4" class="dropdown__label"><img src="/images/location.svg" class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Change location</label>
+                <label for="tools__dropdown4" class="dropdown__label"><img src={{ asset('images/location.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Change location</label>
                 <div class="dropdown__hidden">
                     <div class="dropdown__content">
 
                         <div class="form-group">
-                            <label for="location">enter a location</label>
                             <input type="text" class="form-control" id="location" placeholder="Enter location">
                         </div>
 
@@ -69,7 +66,7 @@
 
             <div class="tools__dropdown">
                 <input id="tools__dropdown5" class="dropdown__toggle" type="checkbox">
-                <label for="tools__dropdown5" class="dropdown__label"><img src="/images/image.svg" class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Choose cover picture</label>
+                <label for="tools__dropdown5" class="dropdown__label"><img src={{ asset('images/image.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Choose cover picture</label>
                 <div class="dropdown__hidden">
                     <div class="dropdown__content">
                         <label for="group2">add or change list picture</label>
@@ -88,7 +85,7 @@
 
             <div class="tools__dropdown">
                 <input id="tools__dropdown6" class="dropdown__toggle" type="checkbox">
-                <label for="tools__dropdown6" class="dropdown__label"><img src="/images/gem.svg" class="filter-secondary inline mr-1" width="28" height="28" title="add" alt="">Add emojis</label>
+                <label for="tools__dropdown6" class="dropdown__label"><img src={{ asset('images/gem.svg') }} class="filter-secondary inline mr-1" width="28" height="28" title="add" alt="">Add emojis</label>
                 <div class="dropdown__hidden">
                     <div class="dropdown__content">
                         <div class="form-group">
@@ -109,7 +106,7 @@
         </form>
         <div class="mt-6">
             <a class="btn btn_cancel ml-2 " href="{{ route('lists.show') }}">Cancel</a>
-            <a class="btn ml-2" href="{{ route('lists.create.success') }}"> Save </a>
+            <a class="btn ml-2" href="{{ route('lists.create.success') }}">Save</a>
             <!-- <button class="btn ml-2" type="submit">Save</button> -->
         </div>
     </section>
