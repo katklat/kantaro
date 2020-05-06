@@ -13,7 +13,7 @@
                     <div class="input-group-append">
                         <button type="submit" class="btn">
                         </button>
-                        <img src="/images/search.svg" class="filter-primary inline mr-2" width="28" height="28" title="add" alt="">
+                        <img src={{ asset('images/search.svg') }} class="filter-primary inline mr-2" width="28" height="28" title="add" alt="">
                     </div>
                 </div>
             </form>

@@ -47,6 +47,9 @@ Route::get('/songs/show', function () {
 Route::get('/songs/edit', function () {
     return view('songs.edit');
 })->name('songs.edit');
+Route::get('/songs/create', function () {
+    return view('songs.create');
+})->name('songs.create');
 
 Route::get('/settings', function () {
     return view('settings');

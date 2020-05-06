@@ -55,6 +55,9 @@ input[type="checkbox"] {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
+.dropdown__label--underlined {
+    text-decoration: underline;
+}
 .edit__link {
     color: #ffffff;
     text-align: right;
