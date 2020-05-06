@@ -9,7 +9,7 @@
             <a class="nav-link" data-toggle="tab" href="{{ route('songs.index') }}">Songs</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#">Tools</a>
+            <a class="nav-link" data-toggle="tab" href="{{ route('settings') }}">Settings</a>
         </li>
     </ul>
 </footer>
