@@ -2,7 +2,7 @@
     <div class="header fixed-top">
         <div class="container d-flex">
             <a href="{{ route('lists.index') }}"> <img src={{ asset('images/back.svg') }} class="filter-primary inline" width="48" height="48" title="add" alt=""></a>
-            @unless (Request::is('*create*') || Request::is('*tools*'))
+            @unless (Request::is('*create*') || Request::is('*tools*') || Request::is('*edit*'))
 
             <a href="{{ route('lists.create') }}"> <img src={{ asset('images/plus.svg') }} class="filter-primary inline mt-2 mr-2" width="32" height="32" title="add" alt=""></a>
 

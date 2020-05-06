@@ -21,18 +21,20 @@ input[type="checkbox"] {
 }
 
 .btn {
-    background: var(--secondary);
     border: none;
     color: #fff;
+}
+.btn_save {
+    background: var(--secondary);
 }
 .btn_cancel {
     background: #555;
     color: #fff;
 }
-/* .btn-edit {
-    background: none;
-} */
-
+.btn_delete {
+    background: var(--tertiary);
+    color: #fff;
+}
 .tools__dropdown {
     padding: 1rem 1rem;
 }
