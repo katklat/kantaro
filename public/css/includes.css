@@ -1,15 +1,15 @@
-.nav {
-    background: var(--primary);
-}
-.selected {
-    background: var(--secondary);
-}
 .header {
     background: var(--secondary);
+}
+.header-dark {
+    color: var(--primary);
+}
+.nav {
+    background: var(--primary);
 }
 .nav-link {
     color: #ffffff;
 }
-.header-dark {
-    color: var(--primary);
+.nav-link--selected {
+    background: var(--secondary);
 }

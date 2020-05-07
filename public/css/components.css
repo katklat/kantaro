@@ -12,20 +12,29 @@ input[type="checkbox"] {
 }
 .card-scroll {
     overflow-y: scroll;
-    height: 200px;
+    height: 180px;
     padding: 1rem;
+}
+.card-title,
+.card-text {
+    color: var(--secondary);
 }
 
 .btn {
-    background: var(--secondary);
     border: none;
     color: #fff;
+}
+.btn_save {
+    background: var(--secondary);
 }
 .btn_cancel {
     background: #555;
     color: #fff;
 }
-
+.btn_delete {
+    background: var(--tertiary);
+    color: #fff;
+}
 .tools__dropdown {
     padding: 1rem 1rem;
 }
@@ -45,4 +54,12 @@ input[type="checkbox"] {
 .dropdown__toggle:checked + .dropdown__label {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
+}
+.dropdown__label--underlined {
+    text-decoration: underline;
+}
+.edit__link {
+    color: #ffffff;
+    text-align: right;
+    padding: 10px 0;
 }
