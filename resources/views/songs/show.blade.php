@@ -3,9 +3,9 @@
 
 <main>
 
-    <div class="container song__container text-left">
+    <div class="container text-left">
         <div class="card my-4 ">
-            <div class="row song__title ">
+            <div class="row">
                 <div class="col-10 ml-1">
                     <h4 class="card-title ml-2 mt-1">The robot who lost its head<h4>
                 </div>
@@ -19,8 +19,8 @@
 
 
             </div>
-            <img class="card-img-top song__image" src="{{ asset('images/landscape.jpg') }}" alt="">
-            <p class="card-text card-scroll song_text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat sapiente voluptatem et eos tenetur! Nobis laudantium recusandae voluptatibus tempora. Consequatur culpa facilis incidunt. Nobis provident voluptate, modi eaque accusamus culpa exercitationem voluptas, earum quia ipsa error harum quam tempore assumenda rerum labore, odit porro expedita illo fugit maiores odio? Eos!
+            <img class="card-img-top" src="{{ asset('images/landscape.jpg') }}" alt="">
+            <p class="card-text card-scroll">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat sapiente voluptatem et eos tenetur! Nobis laudantium recusandae voluptatibus tempora. Consequatur culpa facilis incidunt. Nobis provident voluptate, modi eaque accusamus culpa exercitationem voluptas, earum quia ipsa error harum quam tempore assumenda rerum labore, odit porro expedita illo fugit maiores odio? Eos!
             </p>
 
             <div class="card-footer text-center p-0">
