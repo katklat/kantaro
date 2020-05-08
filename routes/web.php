@@ -31,12 +31,13 @@ Route::get('/lists/create', function () {
 Route::get('/lists/create/success', function () {
     return view('lists.success');
 })->name('lists.create.success');
-Route::get('/lists/add', function () {
-    return view('lists.add');
-})->name('lists.add');
+Route::get('/lists/edit', function () {
+    return view('lists.edit');
+})->name('lists.edit');
 Route::get('/lists/tools', function () {
     return view('lists.tools');
 })->name('lists.tools');
+
 
 Route::get('/songs', function () {
     return view('songs.index');

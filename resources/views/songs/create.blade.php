@@ -20,8 +20,8 @@
                                 <img src={{ asset('images/search.svg') }} class="filter-secondary mr-2" width="28" height="28" title="search" alt="">
                             </div>
                             <div class="tools__dropdown mt-2">
-                                <input id="tools__dropdown5" class="dropdown__toggle" type="checkbox">
-                                <label for="tools__dropdown5" class="dropdown__label dropdown__label--underlined">Enter title and artist manually</label>
+                                <input id="tools__dropdown6" class="dropdown__toggle" type="checkbox">
+                                <label for="tools__dropdown6" class="dropdown__label dropdown__label--underlined">Enter title and artist manually</label>
                                 <div class="dropdown__hidden">
                                     <div class="dropdown__content">
                                         <div class="form-group">
@@ -49,7 +49,7 @@
                 <div class="dropdown__hidden">
                     <div class="dropdown__content">
                         <div class="form-group">
-                            <textarea class="form-control" rows="5" type="text" name="entry" value=""></textarea>
+                            <textarea class="form-control" rows="5" type="text" name="entry" value="">Say something about this song</textarea>
                         </div>
 
                     </div>
@@ -76,7 +76,7 @@
 
             <div class="tools__dropdown">
                 <input id="tools__dropdown4" class="dropdown__toggle" type="checkbox">
-                <label for="tools__dropdown4" class="dropdown__label"><img src={{ asset('images/gem.svg') }} class="filter-secondary inline mr-1" width="28" height="28" title="emoji" alt="">Add emojis</label>
+                <label for="tools__dropdown4" class="dropdown__label"><img src={{ asset('images/emoji.svg') }} class="filter-secondary inline mr-1" width="30" height="30" title="emoji" alt="">Add emojis</label>
                 <div class="dropdown__hidden">
                     <div class="dropdown__content">
                         <div class="form-group">
@@ -94,18 +94,28 @@
                     </div>
                 </div>
             </div>
+
+            <div class="tools__dropdown">
+                <input id="tools__dropdown5" class="dropdown__toggle" type="checkbox">
+                <label for="tools__dropdown5" class="dropdown__label"><img src={{ asset('images/list.svg') }} class="filter-secondary inline mr-1" width="30" height="30" title="emoji" alt="">Add this song to a list</label>
+                <div class="dropdown__hidden">
+                    <div class="dropdown__content">
+                        <div class="form-group">
+                            <label for="group4">select lists </label>
+                            <select autocomplete="off" class="form-control type=" text" name=" lists[]" size="10" multiple>
+                                <option value=""> </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
         <div class="mt-6">
             <a class="btn btn_cancel ml-2 " href="{{ route('lists.show') }}">Cancel</a>
             <a class="btn btn_save ml-2" href="{{ route('songs.show') }}">Save</a>
             <!-- <button class="btn ml-2" type="submit">Save</button> -->
         </div>
-
-
     </section>
-
-
-
 </main>
 
 @endsection
