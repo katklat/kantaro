@@ -27,7 +27,7 @@
                     <div class="dropdown__content">
                         <div class="form-group">
                             <textarea class="form-control" rows="5" type="text" name="entry" value="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto accusantium voluptatibus voluptatem voluptate libero cumque eos, maxime aut, molestias laboriosam deserunt non a placeat consectetur eveniet beatae tempora, autem incidunt quam numquam ipsam quos natus unde rem. Ipsa quos quaerat quia mollitia, dolor, eius facere accusantium quidem, laudantium ea nam.</textarea>
-                            <button class="btn btn_delete mt-2">Empty</button>
+
                         </div>
 
                     </div>
@@ -117,7 +117,7 @@
         <div class="mt-6">
             <a class="btn btn_cancel ml-2 " href="{{ route('lists.show') }}">Cancel</a>
             <a class="btn btn_save ml-2" href="{{ route('lists.create.success') }}">Save</a>
-            <!-- <button class="btn ml-2" type="submit">Save</button> -->
+
         </div>
     </section>
 
