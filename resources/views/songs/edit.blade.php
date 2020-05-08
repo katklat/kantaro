@@ -2,7 +2,8 @@
 @section('content')
 
 <main>
-
+    <h1 class="edit__h1">{{ $song->title }}</h1>
+    <h2 class="edit__h2">by {{ $song->artist }}</h2>
     <section class="tools mt-3">
 
         <form>
@@ -12,7 +13,8 @@
                 <div class="dropdown__hidden">
                     <div class="dropdown__content">
                         <div class="form-group">
-                            <textarea class="form-control" rows="5" type="text" name="entry" value=""></textarea>
+                            <textarea class="form-control" rows="5" type="text" name="entry" value="">{{ old('entry') ?? $song->entry }}</textarea>
+
                         </div>
 
                     </div>
@@ -39,7 +41,7 @@
 
             <div class="tools__dropdown">
                 <input id="tools__dropdown3" class="dropdown__toggle" type="checkbox">
-                <label for="tools__dropdown3" class="dropdown__label"><img src={{ asset('images/gem.svg') }} class="filter-secondary inline mr-1" width="28" height="28" title="add" alt="">Add emojis</label>
+                <label for="tools__dropdown3" class="dropdown__label"><img src={{ asset('images/emoji.svg') }} class="filter-secondary inline mr-1" width="28" height="28" title="add" alt="">Add emojis</label>
                 <div class="dropdown__hidden">
                     <div class="dropdown__content">
                         <div class="form-group">
@@ -71,16 +73,10 @@
             </div>
         </form>
         <div class="mt-6">
-            <a class="btn btn_cancel ml-2 " href="{{ route('lists.show') }}">Cancel</a>
-            <a class="btn btn_save ml-2" href="{{ route('songs.show') }}">Save</a>
-            <!-- <button class="btn ml-2" type="submit">Save</button> -->
+            <a class="btn btn_cancel ml-2 " href="{{ route('songs.show',$song) }}">Cancel</a>
+            <a class="btn btn_save ml-2" href="{{ route('songs.show',$song) }}">Save</a>
         </div>
-
-
     </section>
-
-
-
 </main>
 
 @endsection

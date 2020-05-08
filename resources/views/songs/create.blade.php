@@ -14,7 +14,6 @@
                         <div class="form-group">
                             <div class="input-group input-group-append input-group-sm">
                                 <input name='q' type="text" size="500  " class="form-control input__query" aria-label="Small" aria-describedby="inputGroup-sizing-md" placeholder="Search Spotify database">
-
                                 <button type="submit" class="btn">
                                 </button>
                                 <img src={{ asset('images/search.svg') }} class="filter-secondary mr-2" width="28" height="28" title="search" alt="">
@@ -36,8 +35,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -111,9 +108,8 @@
             </div>
         </form>
         <div class="mt-6">
-            <a class="btn btn_cancel ml-2 " href="{{ route('lists.show') }}">Cancel</a>
-            <a class="btn btn_save ml-2" href="{{ route('songs.show') }}">Save</a>
-            <!-- <button class="btn ml-2" type="submit">Save</button> -->
+            <a class="btn btn_cancel ml-2 " href="{{ route('lists.index') }}">Cancel</a>
+            <a class="btn btn_save ml-2" href="{{ route('songs.index') }}">Save</a>
         </div>
     </section>
 </main>

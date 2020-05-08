@@ -38,19 +38,7 @@ Route::get('/lists/tools', function () {
     return view('lists.tools');
 })->name('lists.tools');
 
-
-Route::get('/songs', function () {
-    return view('songs.index');
-})->name('songs.index');
-Route::get('/songs/show', function () {
-    return view('songs.show');
-})->name('songs.show');
-Route::get('/songs/edit', function () {
-    return view('songs.edit');
-})->name('songs.edit');
-Route::get('/songs/create', function () {
-    return view('songs.create');
-})->name('songs.create');
+Route::resource('/songs', 'SongController');
 
 Route::get('/settings', function () {
     return view('settings');
