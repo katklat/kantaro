@@ -22,6 +22,7 @@ class CreateSongsTable extends Migration
             $table->string('track_id')->nullable();
             $table->string('artist_id')->nullable();
             $table->string('image')->nullable();
+            $table->string('emoji')->nullable();
         });
     }
 

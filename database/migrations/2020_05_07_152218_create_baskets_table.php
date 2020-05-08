@@ -23,6 +23,7 @@ class CreateBasketsTable extends Migration
             $table->string('month')->nullable();
             $table->year('year')->nullable();
             $table->string('image')->nullable();
+            $table->string('emoji')->nullable();
         });
     }
 

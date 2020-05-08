@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBasketSongsTable extends Migration
+class CreateBasketsSongsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateBasketSongsTable extends Migration
      */
     public function up()
     {
-        Schema::create('basket_songs', function (Blueprint $table) {
+        Schema::create('basket_song', function (Blueprint $table) {
             $table->foreignId('song_id')->constrained()->onDelete('cascade');
             $table->foreignId('basket_id')->constrained()->onDelete('cascade');
         });
@@ -26,6 +26,6 @@ class CreateBasketSongsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('basket_songs');
+        Schema::dropIfExists('basket_song');
     }
 }

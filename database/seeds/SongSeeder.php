@@ -12,11 +12,6 @@ class SongSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('songs')->insert([
-            [
-                'title' => 'The robot who lost its head',
-                'artist' => 'Buckethead'
-            ]
-        ]);
+        factory(App\Song::class, 50)->create();
     }
 }

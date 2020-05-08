@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class BasketSeeder extends Seeder
 {
@@ -12,11 +11,6 @@ class BasketSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('baskets')->insert([
-            [
-                'name' => 'Bucketlist',
-
-            ]
-        ]);
+        factory(App\Basket::class, 10)->create();
     }
 }
