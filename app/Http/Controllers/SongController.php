@@ -18,8 +18,9 @@ class SongController extends Controller
      */
     public function index()
     {
+        $orderBy = 'created_at';
         return view('songs/index', [
-            'songs' => Song::all()
+            'songs' => Song::all()->sortByDesc($orderBy)
         ]);
     }
 
@@ -41,7 +42,11 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->validateData();
+        $data = $this->validateNewData();
+        if ($request->has('image')) {
+            $path = $request->file('image')->store('/songs/images', 'public');
+            $data['image'] = $path;
+        }
 
         Song::create($data);
 
@@ -50,7 +55,7 @@ class SongController extends Controller
 
     /**
      * Display the specified resource.
-     *
+     *x
      * @param  \App\Song  $song
      * @return \Illuminate\Http\Response
      */
@@ -67,9 +72,7 @@ class SongController extends Controller
      */
     public function edit(Song $song)
     {
-        return view('songs/edit', [
-            'song' => $song
-        ]);
+        return view('songs/edit', ['song' => $song]);
     }
 
     /**
@@ -82,15 +85,13 @@ class SongController extends Controller
     public function update(Request $request, Song $song)
     {
         $data = $this->validateData();
-        // if ($request->has('image')) {
-        //     $path = $request->file('image')->store('/songs/images', 'public');
-        //     $data['image'] = $path;
-        // }
+        if ($request->has('image')) {
+            $path = $request->file('image')->store('/songs/images', 'public');
+            $data['image'] = $path;
+        }
         $song->update($data);
-
-        return redirect()->route('songs.index');
+        return redirect()->route('songs.show', ['song' => $song]);
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -103,12 +104,21 @@ class SongController extends Controller
 
         return redirect()->route('songs.index');
     }
-    private function validateData()
+    private function validateNewData()
     {
         return request()->validate([
             'title' => 'required',
             'artist' => 'required',
-            'entry' => 'required|min:3',
+            'entry' => 'min:3',
+            'emoji' => '',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+    }
+    private function validateData()
+    {
+        return request()->validate([
+            'entry' => 'min:3',
+            'emoji' => '',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
     }
