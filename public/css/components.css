@@ -63,3 +63,13 @@ input[type="checkbox"] {
     text-align: right;
     padding: 10px 0;
 }
+.edit__h1 {
+    font-size: 1.5rem;
+    color: #fff;
+    padding-top: 12px;
+    padding-left: 12px;
+}
+.edit__h2 {
+    font-size: 1.5rem;
+    padding-left: 12px;
+}

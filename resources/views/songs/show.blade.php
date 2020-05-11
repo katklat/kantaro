@@ -2,29 +2,25 @@
 @section('content')
 
 <main>
-
     <div class="container text-left">
         <div class="card my-4 ">
             <div class="row">
                 <div class="col-10 ml-1">
-                    <h4 class="card-title ml-2 mt-1">The robot who lost its head<h4>
+                    <h4 class="card-title ml-2 mt-1">{{ $song->title }}</h4>
                 </div>
                 <div class="col-1  p-1">
-                    <a href="{{ route('songs.edit') }}">
-                        <img src={{ asset('images/pencil.svg') }} class="filter-secondary" width="28" height="28" title="add" alt="">
+                    <a href="{{ route('songs.edit', $song) }}">
+                        <img src={{ asset('images/pencil.svg') }} class="filter-secondary" width="28" height="28" title="add" alt="edit">
                     </a>
                 </div>
-
-                <h6 class="card-subtitle text-muted pl-4 pb-2">by Buckethead</h6>
-
-
+                <h6 class="card-subtitle text-muted pl-4 pb-2">{{ $song->artist }}</h6>
             </div>
-            <img class="card-img-top" src="{{ asset('images/landscape.jpg') }}" alt="">
-            <p class="card-text card-scroll">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat sapiente voluptatem et eos tenetur! Nobis laudantium recusandae voluptatibus tempora. Consequatur culpa facilis incidunt. Nobis provident voluptate, modi eaque accusamus culpa exercitationem voluptas, earum quia ipsa error harum quam tempore assumenda rerum labore, odit porro expedita illo fugit maiores odio? Eos!
+            <img class="card-img-top" src={{$song->imageUrl($song->image)}}>
+            <p class="card-text card-scroll">{{ $song->entry }}
             </p>
 
             <div class="card-footer text-center p-0">
-                <span class="card-icon">🤖</span>
+                <span class="card-icon">{{ $song->emoji }}</span>
             </div>
         </div>
     </div>
