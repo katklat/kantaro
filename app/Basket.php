@@ -4,6 +4,7 @@ namespace App;
 
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Basket extends Model
 {
@@ -12,5 +13,13 @@ class Basket extends Model
     public function songs()
     {
         return $this->belongsToMany('App\Song');
+    }
+    public function imageUrl($value)
+    {
+        if ($value) {
+            return Storage::url($value);
+        }
+
+        return 'https://lorempixum.com/400/200/nature/?87706';
     }
 }
