@@ -49,7 +49,7 @@
                 <div class="dropdown__hidden">
                     <div class="dropdown__content">
                         <div class="form-group">
-                            <textarea class="form-control" rows="5" name="entry">Say something about this song</textarea>
+                            <textarea class="form-control" rows="5" name="entry" placeholder="Say something about this song"></textarea>
                         </div>
 
                     </div>

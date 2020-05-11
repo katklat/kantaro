@@ -118,7 +118,7 @@ class SongController extends Controller
     {
         return request()->validate([
             'entry' => 'min:3',
-            'emoji' => '',
+            'emoji' => 'nullable',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
     }

@@ -19,25 +19,12 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/lists', function () {
-    return view('lists.index');
-})->name('lists.index');
-Route::get('/lists/1', function () {
-    return view('lists.show');
-})->name('lists.show');
-Route::get('/lists/create', function () {
-    return view('lists.create');
-})->name('lists.create');
-Route::get('/lists/create/success', function () {
-    return view('lists.success');
-})->name('lists.create.success');
-Route::get('/lists/edit', function () {
-    return view('lists.edit');
-})->name('lists.edit');
-Route::get('/lists/tools', function () {
-    return view('lists.tools');
-})->name('lists.tools');
 
+Route::get('/baskets/{basket}/tools', function () {
+    return view('baskets.tools');
+})->name('tools');
+
+Route::resource('/baskets', 'BasketController');
 Route::resource('/songs', 'SongController');
 
 Route::get('/settings', function () {

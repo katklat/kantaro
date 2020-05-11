@@ -63,7 +63,6 @@ class BasketController extends Controller
      */
     public function edit(Basket $basket)
     {
-
         return view('baskets.edit', ['basket' => $basket]);
     }
 

@@ -3,7 +3,7 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="{{ route('home') }}">Home</a> </li>
         <li class="nav-item">
-            <a class="nav-link nav-link--selected" data-toggle="tab" href="{{ route('lists.index') }}">Lists</a>
+            <a class="nav-link nav-link--selected" data-toggle="tab" href="{{ route('baskets.index') }}">Lists</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="{{ route('songs.index') }}">Songs</a>
