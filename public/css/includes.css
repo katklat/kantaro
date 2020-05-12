@@ -1,5 +1,5 @@
 .header {
-    background: var(--secondary);
+    background: var(--primary);
 }
 .header-dark {
     color: var(--primary);
