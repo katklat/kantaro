@@ -17,10 +17,7 @@ use SpotifyWebAPI\SpotifyWebAPI;
 |
 */
 
-// Route::get('/', function () {
-//     return view('home');
-// })->name('home');
-
+Route::get('/search', 'SearchController@index')->name('search');
 Route::get('/', function () {
 
     $randomSong = DB::table('songs')
