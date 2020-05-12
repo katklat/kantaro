@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use SpotifyWebAPI;
+use Illuminate\Support\Facades\DB;
 use App\Basket;
 use App\Song;
+
 
 class SearchController extends Controller
 {
@@ -27,5 +30,17 @@ class SearchController extends Controller
             'songs' => $songs,
             'query' => $query
         ]);
+    }
+
+    public function random()
+    {
+        $randomSong = DB::table('songs')
+            ->inRandomOrder()
+            ->first();
+
+        $imgUrl = Song::find($randomSong->id)
+            ->imageUrl($randomSong->image);
+
+        return view('home', ['song' => $randomSong, 'imgUrl' => $imgUrl]);
     }
 }
