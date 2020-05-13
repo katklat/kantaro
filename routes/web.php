@@ -17,6 +17,9 @@ use SpotifyWebAPI\SpotifyWebAPI;
 Route::get('/', 'SearchController@random')->name('home');
 Route::get('/search', 'SearchController@index')->name('search');
 
+Route::get('/auth', 'ApiController@authenticate');
+Route::get('/spoti', 'ApiController@callback');
+
 Route::get('/baskets/{basket}/tools', function () {
     return view('baskets.tools');
 })->name('tools');
