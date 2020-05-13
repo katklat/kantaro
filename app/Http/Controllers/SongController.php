@@ -1,9 +1,5 @@
 <?php
 
-//use App\Http\Controllers\Controller;
-use App\Song;
-use Illuminate\Http\Request;
-
 namespace App\Http\Controllers;
 
 use App\Song;

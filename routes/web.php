@@ -1,9 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
-use App\Song;
-use Illuminate\Support\Facades\Http;
 use SpotifyWebAPI\SpotifyWebAPI;
 
 /*
@@ -17,21 +14,8 @@ use SpotifyWebAPI\SpotifyWebAPI;
 |
 */
 
-// Route::get('/', function () {
-//     return view('home');
-// })->name('home');
-
-Route::get('/', function () {
-
-    $randomSong = DB::table('songs')
-        ->inRandomOrder()
-        ->first();
-
-    $imgUrl = Song::find($randomSong->id)
-        ->imageUrl($randomSong->image);
-
-    return view('home', ['song' => $randomSong, 'imgUrl' => $imgUrl]);
-})->name('home');
+Route::get('/', 'SearchController@random')->name('home');
+Route::get('/search', 'SearchController@index')->name('search');
 
 Route::get('/baskets/{basket}/tools', function () {
     return view('baskets.tools');
