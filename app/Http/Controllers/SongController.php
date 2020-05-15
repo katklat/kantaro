@@ -75,7 +75,7 @@ class SongController extends Controller
      */
     public function update(Request $request, Song $song)
     {
-        $data = $this->validateData();
+        $data = $this->validateSongDetails();
         if ($request->has('image')) {
             $path = $request->file('image')->store('/songs/images', 'public');
             $data['image'] = $path;
@@ -105,7 +105,7 @@ class SongController extends Controller
 
         ]);
     }
-    private function validateData()
+    private function validateSongDetails()
     {
         return request()->validate([
             'title' => 'required',

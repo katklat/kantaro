@@ -33,7 +33,7 @@
         </div>
         <div class="tools__dropdown">
             <input id="tools__dropdown2" class="dropdown__toggle" type="checkbox">
-            <label for="tools__dropdown2" class="dropdown__label"><img src={{ asset('images/text.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="entry" alt="">Edit entry</label>
+            <label for="tools__dropdown2" class="dropdown__label"><img src="{{ asset('images/text.svg') }}" class="filter-secondary inline mr-2" width="28" height="28" title="entry" alt="">Edit entry</label>
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
                     <div class="form-group">
@@ -46,7 +46,7 @@
 
         <div class="tools__dropdown">
             <input id="tools__dropdown3" class="dropdown__toggle" type="checkbox">
-            <label for="tools__dropdown3" class="dropdown__label"><img src={{ asset('images/image.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="picture" alt="">Choose song picture</label>
+            <label for="tools__dropdown3" class="dropdown__label"><img src="{{ asset('images/image.svg') }}" class="filter-secondary inline mr-2" width="28" height="28" title="picture" alt="">Choose song picture</label>
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
                     <div class="input-group">
@@ -59,7 +59,7 @@
 
         <div class="tools__dropdown">
             <input id="tools__dropdown4" class="dropdown__toggle" type="checkbox">
-            <label for="tools__dropdown4" class="dropdown__label"><img src={{ asset('images/emoji.svg') }} class="filter-secondary inline mr-1" width="30" height="30" title="emoji" alt="">Add emojis</label>
+            <label for="tools__dropdown4" class="dropdown__label"><img src="{{ asset('images/emoji.svg') }}" class="filter-secondary inline mr-1" width="30" height="30" title="emoji" alt="">Add emojis</label>
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
                     <div class="form-group">
@@ -71,7 +71,7 @@
         </div>
         <div class="tools__dropdown">
             <input id="tools__dropdown5" class="dropdown__toggle" type="checkbox">
-            <label for="tools__dropdown5" class="dropdown__label"><img src={{ asset('images/list.svg') }} class="filter-secondary inline mr-1" width="30" height="30" title="emoji" alt="">Add this song to a list</label>
+            <label for="tools__dropdown5" class="dropdown__label"><img src="{{ asset('images/list.svg') }}" class="filter-secondary inline mr-1" width="30" height="30" title="emoji" alt="">Add this song to a list</label>
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
                     <div class="form-group">
@@ -93,7 +93,7 @@
                 @csrf
                 @method('DELETE')
                 <input id="tools__dropdown6" class="dropdown__toggle" type="checkbox">
-                <label for="tools__dropdown6" class="dropdown__label"><img src={{ asset('images/delete.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Delete song</label>
+                <label for="tools__dropdown6" class="dropdown__label"><img src="{{ asset('images/delete.svg') }}" class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Delete song</label>
                 <div class="dropdown__hidden">
                     <div class="dropdown__content">
                         <div class="form-group text-right">
