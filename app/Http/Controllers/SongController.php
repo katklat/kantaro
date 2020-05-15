@@ -27,7 +27,7 @@ class SongController extends Controller
      */
     public function create()
     {
-        return view('songs/create');
+        return view('songs/search');
     }
 
     /**
@@ -38,12 +38,7 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->validateNewData();
-        if ($request->has('image')) {
-            $path = $request->file('image')->store('/songs/images', 'public');
-            $data['image'] = $path;
-        }
-
+        $data = $this->validateSongData();
         Song::create($data);
 
         return redirect()->route('songs.index');
@@ -100,20 +95,22 @@ class SongController extends Controller
 
         return redirect()->route('songs.index');
     }
-    private function validateNewData()
+    private function validateSongData()
     {
         return request()->validate([
             'title' => 'required',
             'artist' => 'required',
-            'entry' => 'min:3',
-            'emoji' => '',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'track_id' => 'nullable',
+            'artist_id' => 'nullable'
+
         ]);
     }
     private function validateData()
     {
         return request()->validate([
-            'entry' => 'min:3',
+            'title' => 'required',
+            'artist' => 'required',
+            'entry' => 'nullable',
             'emoji' => 'nullable',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);

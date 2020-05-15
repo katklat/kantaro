@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use SpotifyWebAPI;
-use Illuminate\Support\Facades\Config;
+
 
 class ApiController extends Controller
 {
@@ -17,6 +17,7 @@ class ApiController extends Controller
                 'user-read-private'
             ],
             'auto_refresh' => true,
+            'return_assoc' => true
         ];
 
         return redirect($session->getAuthorizeUrl($options));
@@ -31,17 +32,21 @@ class ApiController extends Controller
         session(['access_token' => $accessToken]);
         session(['refresh_token' => $refreshToken]);
 
-        return redirect('spotifyData');
+        return redirect('/');
     }
 
-    //example query
-    public function data(SpotifyWebAPI\SpotifyWebAPI $api)
+    public function search(SpotifyWebAPI\SpotifyWebAPI $api)
     {
-
+        $query = request()->input('q');
         $api->setAccessToken(session()->get('access_token'));
-        return [
-            $api->getTrack('7EjyzZcbLxW7PaaLua9Ksb'),
-            $api->me()
-        ];
+
+        $results = $api->search($query, 'track');
+        $songs = $results->tracks->items;
+
+        return view('songs.create', [
+            'songs' => $songs,
+            'query' => $query
+
+        ]);
     }
 }
