@@ -9,7 +9,7 @@
 
             <div class="dropdown__content">
                 <div class="form-group">
-                    <form method="POST" class="form-inline" action="{{ route('apisearch') }}">
+                    <form method="POST" class="form-inline" action="{{ url("/songs/search/track") }}">
                         @csrf
                         <div class="input-group input-group-append input-group-sm">
                             <input name='q' type="text" size="500" class="form-control input__query ml-3" aria-label="Small" aria-describedby="inputGroup-sizing-md" placeholder="Search with Spotify...">

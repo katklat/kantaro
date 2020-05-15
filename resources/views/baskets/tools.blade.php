@@ -15,7 +15,7 @@
                         <label for="spotify_name">name your Spotify playlist</label>
                         <input type="text" class="form-control" id="spotify_name" placeholder="Enter name">
                         <p class="mt-3">This upload will create a new playlist within your Spotify account using the song titles. It will not share photos and other information from this app. </p>
-                        <a class="btn btn_save" href="#}">Upload</a>
+                        <a class="btn btn_save" href="#">Upload</a>
                     </div>
                 </div>
             </div>
@@ -27,18 +27,17 @@
             <label for="tools__dropdown2" class="dropdown__label"><img src={{ asset('images/download.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Download playlist from Spotify</label>
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
-                    <div class="input-group input-group-append input-group-sm">
-                        <label for="q">Enter name of playlist to search Spotify database</label>
-                        <input name='q' type="text" id="spotify_name" size="500  " class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-md" placeholder="Enter playlist name">
-
-                        <button type="submit" class="btn">
-                        </button>
-                        <img src={{ asset('images/search.svg') }} class="filter-secondary mr-2" width="28" height="28" title="search" alt="">
-                        <p class="mt-3">This download will add 42 new songs to your list. </p>
-                        <a class="btn btn_save" href="#}">Download</a>
-                    </div>
+                    <form method="POST" class="" action="{{ url("/baskets/search/playlist") }}">
+                        <div class="input-group input-group-append input-group-sm">
+                            @csrf
+                            <input name='q' type="text" class="form-control mt-2" aria-label="Small" aria-describedby="inputGroup-sizing-md" placeholder="Search playlist with Spotify...">
+                            <button type="submit" class="btn">
+                                <img src="{{ asset('images/search.svg') }}" class="filter-secondary mr-2" width="28" height="28" title="search" alt="">
+                            </button>
+                    </form>
                 </div>
             </div>
+        </div>
         </div>
         <hr>
         <div class="tools__dropdown">

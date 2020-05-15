@@ -15,7 +15,13 @@
 </head>
 
 <body class="d-flex flex-column">
+    @if (Request::is('*/search*'))
+    @include('includes/header_api')
+
+    @else
     @include('includes/header')
+    @endif
+
     @yield('content')
     @include('includes/footer')
 </body>

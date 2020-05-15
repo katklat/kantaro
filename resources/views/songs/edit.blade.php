@@ -75,10 +75,16 @@
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
                     <div class="form-group">
-                        <label for="group4">select lists </label>
-                        <select autocomplete="off" class="form-control type=" text" name=" lists[]" size="10" multiple>
-                            <option value=""> </option>
+                        <label class="control-label">select lists </label>
+                        <select multiple autocomplete="off" name="baskets[]" size="5" class="form-control @error('baskets') is-invalid @enderror">
+                            @foreach ($baskets as $basket)
+                            <option @if($selectedBaskets->contains($basket)) selected @endif
+                                value="{{ $basket->id }}">{{ $basket->name }}</option>
+                            @endforeach
                         </select>
+                        @error('baskets')
+                        <p class="invalid-feedback">{{ $errors->first('baskets') }}</p>
+                        @enderror
                     </div>
                 </div>
             </div>
