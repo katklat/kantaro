@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="{{ asset('css/segmented-control.css') }}">
     <link rel="stylesheet" href="{{ asset('css/includes.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components.css') }}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body class="d-flex flex-column">
@@ -25,6 +24,13 @@
     @yield('content')
     @include('includes/footer')
 </body>
-<script src="https://kit.fontawesome.com/60e503aef4.js" crossorigin="anonymous"></script>
+
+<script>
+    document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+        var fileName = document.getElementById("inputFile").files[0].name;
+        var nextSibling = e.target.nextElementSibling
+        nextSibling.innerText = fileName
+    })
+</script>
 
 </html>

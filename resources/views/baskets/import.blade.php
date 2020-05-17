@@ -14,15 +14,16 @@
                     <p class="m-0">{{ $song->track->name }} </br>by {{ $song->track->artists[0]->name }}</p>
                     <input name="basket" type="hidden" value="{{ $basket }}">
                 </div>
-
                 <div class="col-3">
-                    <input class="form-check-input" type="checkbox" name="track_ids[]" value="{{ $song->track->id }}" checked>
+                    <label class="container__checkboxes">
+                        <input type="checkbox" name="track_ids[]" value="{{ $song->track->id }}" checked>
+                        <span class="checkmark"></span>
+                    </label>
                 </div>
-
             </div>
-
             <hr>
             @endforeach
+
             <div class="mt-6">
                 <a class="btn btn_cancel" href="{{ route('baskets.index') }}">Cancel</a>
                 <button type="submit" class="btn ml-2 btn_save">Import </button>
