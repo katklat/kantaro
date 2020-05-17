@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Song;
 use Illuminate\Http\Request;
+use App\Basket;
 
 class SongController extends Controller
 {
@@ -63,7 +64,12 @@ class SongController extends Controller
      */
     public function edit(Song $song)
     {
-        return view('songs/edit', ['song' => $song]);
+        //dd($song->basket)
+        return view('songs/edit', [
+            'song' => $song,
+            'baskets' => Basket::all(),
+            'selectedBaskets' => $song->baskets
+        ]);
     }
 
     /**
@@ -75,12 +81,14 @@ class SongController extends Controller
      */
     public function update(Request $request, Song $song)
     {
-        $data = $this->validateData();
+        $data = $this->validateSongDetails();
         if ($request->has('image')) {
             $path = $request->file('image')->store('/songs/images', 'public');
             $data['image'] = $path;
         }
         $song->update($data);
+        $song->baskets()->sync($request->input('baskets'));
+
         return redirect()->route('songs.show', ['song' => $song]);
     }
     /**
@@ -105,14 +113,15 @@ class SongController extends Controller
 
         ]);
     }
-    private function validateData()
+    private function validateSongDetails()
     {
         return request()->validate([
             'title' => 'required',
             'artist' => 'required',
             'entry' => 'nullable',
             'emoji' => 'nullable',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'basket' => 'exists: baskets,id',
         ]);
     }
 }

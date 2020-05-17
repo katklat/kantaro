@@ -22,7 +22,8 @@ Route::resource('/songs', 'SongController');
 
 Route::get('/auth', 'ApiController@authenticate');
 Route::get('/spoti', 'ApiController@callback');
-Route::post('/songs/search', 'ApiController@search')->name('apisearch');
+Route::post('/songs/search/{type}', 'ApiController@search');
+Route::post('/baskets/search/{type}', 'ApiController@search');
 
 Route::get('/baskets/{basket}/tools', function () {
     return view('baskets.tools');

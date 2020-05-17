@@ -9,18 +9,18 @@
 
             <div class="dropdown__content">
                 <div class="form-group">
-                    <form method="POST" class="form-inline my-2 my-lg-0" action="{{ route('apisearch') }}">
+                    <form method="POST" class="form-inline" action="{{ url("/songs/search/track") }}">
                         @csrf
                         <div class="input-group input-group-append input-group-sm">
-                            <input name='q' type="text" size="500" class="form-control input__query" aria-label="Small" aria-describedby="inputGroup-sizing-md" placeholder="Search Spotify library">
+                            <input name='q' type="text" size="500" class="form-control input__query ml-3" aria-label="Small" aria-describedby="inputGroup-sizing-md" placeholder="Search with Spotify...">
                             <button type="submit" class="btn">
-                                <img src={{ asset('images/search.svg') }} class="filter-secondary mr-2" width="28" height="28" title="search" alt="">
+                                <img src="{{ asset('images/search.svg') }}" class="filter-secondary mr-2" width="28" height="28" title="search" alt="">
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
-            <form method="POST" action=" {{route('songs.store')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('songs.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="tools__dropdown mt-2">
                     <input id="tools__dropdown6" class="dropdown__toggle" type="checkbox">
