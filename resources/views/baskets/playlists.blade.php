@@ -5,13 +5,14 @@
     <h4 class="m-3 inline">Results for "{{ $query }}": </h4>
     <div class="container">
 
-        @foreach($baskets as $basket)
-        <form method="POST" action=" {{route('songs.store')}}">
+        @foreach($lists as $list)
+        <form method="GET" action=" {{route('getPlaylist')}}">
             @csrf
             <div class="row align-items-center">
                 <div class="col-9">
-                    <p class="m-0">{{ $basket->name }} </br>by {{ $basket->owner->display_name }}</br>{{ $basket->tracks->total }} songs</p>
-                    <input name="playlist_id" type="hidden" value="{{ $basket->id }}">
+                    <p class="m-0">{{ $list->name }} </br>by {{ $list->owner->display_name }}</br>{{ $list->tracks->total }} songs</p>
+                    <input name="playlist_id" type="hidden" value="{{ $list->id }}">
+                    <input name="basket" type="hidden" value="{{ $basket }}">
                 </div>
                 <div class="col-3">
                     <button class="btn btn_save ml-2" type="submit">add</button>

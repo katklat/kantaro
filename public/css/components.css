@@ -2,7 +2,7 @@ h2 {
     color: #fff;
 }
 
-input[type="checkbox"] {
+.dropdown__toggle {
     display: none;
 }
 
@@ -72,4 +72,6 @@ input[type="checkbox"] {
 .edit__h2 {
     font-size: 1.5rem;
     padding-left: 12px;
+}
+.form-check-input {
 }

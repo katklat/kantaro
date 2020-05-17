@@ -30,7 +30,8 @@
                     <form method="POST" class="" action="{{ url("/baskets/search/playlist") }}">
                         <div class="input-group input-group-append input-group-sm">
                             @csrf
-                            <input name='q' type="text" class="form-control mt-2" aria-label="Small" aria-describedby="inputGroup-sizing-md" placeholder="Search playlist with Spotify...">
+                            <input name="q" type="text" class="form-control mt-2" aria-label="Small" aria-describedby="inputGroup-sizing-md" placeholder="Search playlist with Spotify...">
+                            <input name="basket" type="hidden" value="{{ $basket->id }}">
                             <button type="submit" class="btn">
                                 <img src="{{ asset('images/search.svg') }}" class="filter-secondary mr-2" width="28" height="28" title="search" alt="">
                             </button>
@@ -52,6 +53,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
     </section>

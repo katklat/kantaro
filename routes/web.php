@@ -1,5 +1,6 @@
 <?php
 
+//use App\Http\Controllers\BasketController;
 use Illuminate\Support\Facades\Route;
 use SpotifyWebAPI\SpotifyWebAPI;
 
@@ -24,10 +25,11 @@ Route::get('/auth', 'ApiController@authenticate');
 Route::get('/spoti', 'ApiController@callback');
 Route::post('/songs/search/{type}', 'ApiController@search');
 Route::post('/baskets/search/{type}', 'ApiController@search');
+Route::get('/baskets/search/playlist', 'ApiController@renderPlaylistSongs')->name('getPlaylist');
+Route::patch('/baskets/{basket}', 'ApiController@importPlaylist')->name('import');
 
-Route::get('/baskets/{basket}/tools', function () {
-    return view('baskets.tools');
-})->name('tools');
+
+Route::get('/baskets/{basket}/tools', 'BasketController@tools')->name('tools');
 
 Route::get('/settings', function () {
     return view('settings');

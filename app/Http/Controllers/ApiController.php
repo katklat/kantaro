@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use SpotifyWebAPI;
+use App\Song;
 
 
 class ApiController extends Controller
@@ -46,7 +47,7 @@ class ApiController extends Controller
                 return $this->renderSongs($results, $query);
                 break;
             case 'playlist':
-                return $this->renderPlaylists($results, $query);
+                return $this->renderPlaylists($results, $query, request()->basket);
                 break;
         }
     }
@@ -58,17 +59,50 @@ class ApiController extends Controller
         return view('songs.create', [
             'songs' => $songs,
             'query' => $query
-
         ]);
     }
 
-    private function renderPlaylists(object $results, string $query)
+    private function renderPlaylists(object $results, string $query, $basket)
     {
-        $baskets = $results->playlists->items;
+        $lists = $results->playlists->items;
 
         return view('baskets.playlists', [
-            'baskets' => $baskets,
-            'query' => $query
+            'lists' => $lists,
+            'query' => $query,
+            'basket' => $basket
         ]);
+    }
+
+    public function renderPlaylistSongs(SpotifyWebAPI\SpotifyWebAPI $api)
+    {
+        $api->setAccessToken(session()->get('access_token'));
+        $songs = $api->getPlaylistTracks(request()->playlist_id)->items;
+        $basket = request()->basket;
+        return view('baskets.import', [
+            'songs' => $songs,
+            'basket' => $basket
+        ]);
+    }
+
+    public function importPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request)
+    {
+        $api->setAccessToken(session()->get('access_token'));
+        foreach (request()->track_ids as $track_id) {
+            $this->getSongData($api, $track_id, request()->basket);
+        };
+    }
+
+    private function getSongData(SpotifyWebAPI\SpotifyWebAPI $api, string $track_id, $basket)
+    {
+        $track = $api->getTrack($track_id);
+
+        $song_data = [
+            'title' => $track->name,
+            'artist' => $track->artists[0]->name,
+            'track_id' => $track->id,
+            'artist_id' => $track->artists[0]->id
+        ];
+
+        Song::store($song_data, $basket);
     }
 }

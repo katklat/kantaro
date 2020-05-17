@@ -76,10 +76,10 @@ class BasketController extends Controller
     public function update(Request $request, Basket $basket)
     {
         $data = $this->validateData();
-        // if ($request->has('image')) {
-        //     $path = $request->file('image')->store('/songs/images', 'public');
-        //     $data['image'] = $path;
-        // }
+        if ($request->has('image')) {
+            $path = $request->file('image')->store('/songs/images', 'public');
+            $data['image'] = $path;
+        }
         $basket->update($data);
 
         return redirect()->route('baskets.index');

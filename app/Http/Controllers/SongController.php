@@ -64,7 +64,6 @@ class SongController extends Controller
      */
     public function edit(Song $song)
     {
-        //dd($song->basket)
         return view('songs/edit', [
             'song' => $song,
             'baskets' => Basket::all(),
