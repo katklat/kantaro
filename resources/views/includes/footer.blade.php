@@ -12,4 +12,11 @@
             <a class="nav-link {{Request::is('settings') ? 'nav-link--selected' : ''}}" data-toggle="tab" href="{{ route('settings') }}">Settings</a>
         </li>
     </ul>
+    <script>
+        document.querySelector('.custom-file-input').addEventListener('change', function(e) {
+            var fileName = document.getElementById("inputFile").files[0].name;
+            var nextSibling = e.target.nextElementSibling
+            nextSibling.innerText = fileName
+        })
+    </script>
 </footer>

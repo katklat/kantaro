@@ -9,7 +9,9 @@
         @foreach ($songs as $song)
         <div class="card mb-4">
             <a href="{{ route('songs.show', $song) }}">
+                @if ($song->image)
                 <img class="card-img-top" src={{$song->imageUrl($song->image)}}>
+                @endif
                 <div class="card-body text-left">
                     <div class="row">
                         <div class="col-9">

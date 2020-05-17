@@ -8,7 +8,9 @@
         @foreach ($baskets as $basket)
         <div>
             <a href="{{ route('baskets.show', $basket) }}" class="d-block rounded-lg mb-4 pb-1 bg-light text-decoration-none">
+                @if ($basket->image)
                 <img class="img-fluid rounded-top mb-3" src={{$basket->imageUrl($basket->image)}} />
+                @endif
                 <h4 class="text-dark  no-gutters ">{{ $basket->name }}</h4>
             </a>
         </div>

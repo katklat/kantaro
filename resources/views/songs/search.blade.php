@@ -28,11 +28,11 @@
                     <div class="dropdown__hidden">
                         <div class="dropdown__content">
                             <div class="form-group">
-                                <label class="control-label">add title</label>
+                                <label class="control-label">add title*</label>
                                 <input type="text" class="form-control" name="title" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label for="artist">add artist</label>
+                                <label for="artist">add artist*</label>
                                 <input type="text" class="form-control" name="artist" placeholder="">
                             </div>
                             <div>

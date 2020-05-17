@@ -21,10 +21,12 @@
                                 <div class="form-group">
                                     <label class="control-label">edit title</label>
                                     <input type="text" class="form-control" name="title" value="{{ old('title') ?? $song->title }}">
+                                    @error('title')<p>{{ $errors->first('title') }}</p>@enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="artist">edit artist</label>
                                     <input type="text" class="form-control" name="artist" value="{{ old('artist') ?? $song->artist }}">
+                                    @error('artist')<p>{{ $errors->first('artist') }}</p>@enderror
                                 </div>
                             </div>
                     </div>
@@ -50,8 +52,8 @@
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
                     <div class="input-group">
-                        <input name="image" type="file" class="custom-file-input" id="inputGroupImage" aria-describedby="inputGroupImage">
-                        <label class="custom-file-label" for="inputGroupImage">Choose file</label>
+                        <input name="image" type="file" class="custom-file-input" id="inputFile" aria-describedby="inputGroupImage">
+                        <label class="custom-file-label" for="inputFile">Choose file</label>
                     </div>
                 </div>
             </div>
