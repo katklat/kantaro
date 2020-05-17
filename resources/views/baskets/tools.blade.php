@@ -8,15 +8,19 @@
         <div class="tools__dropdown">
 
             <input id="tools__dropdown1" class="dropdown__toggle" type="checkbox">
-            <label for="tools__dropdown1" class="dropdown__label"><img src={{ asset('images/upload.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Upload list to Spotify</label>
+            <label for="tools__dropdown1" class="dropdown__label"><img src={{ asset('images/upload.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Export list to Spotify</label>
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
-                    <div class="form-group">
-                        <label for="spotify_name">name your Spotify playlist</label>
-                        <input type="text" class="form-control" id="spotify_name" placeholder="Enter name">
-                        <p class="mt-3">This upload will create a new playlist within your Spotify account using the song titles. It will not share photos and other information from this app. </p>
-                        <a class="btn btn_save" href="#">Upload</a>
-                    </div>
+                    <form method="POST" class="" action="{{ route('export',  $basket) }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="spotify_name">name your Spotify playlist</label>
+                            <input type="text" class="form-control" name="spotify_name" placeholder="Enter name" value="{{ old('name') ?? $basket->name }}">
+                            @error('spotify_name')<p>{{ $errors->first('spotify_name') }}</p>@enderror
+                            <p class="mt-3">This upload will create a new private playlist within your Spotify account using the song titles. It will not share photos and other information from this app. </p>
+                            <button type="submit" class="btn  btn_save">Create playlist</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -24,7 +28,7 @@
         <div class="tools__dropdown">
 
             <input id="tools__dropdown2" class="dropdown__toggle" type="checkbox">
-            <label for="tools__dropdown2" class="dropdown__label"><img src={{ asset('images/download.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Download playlist from Spotify</label>
+            <label for="tools__dropdown2" class="dropdown__label"><img src={{ asset('images/download.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Import playlist from Spotify</label>
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
                     <form method="POST" class="" action="{{ url("/baskets/search/playlist") }}">

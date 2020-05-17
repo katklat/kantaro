@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use SpotifyWebAPI;
+use App\Basket;
 use App\Song;
-
 
 class ApiController extends Controller
 {
@@ -15,7 +15,9 @@ class ApiController extends Controller
         $options = [
             'scope' => [
                 'playlist-read-private',
-                'user-read-private'
+                'user-read-private',
+                'playlist-modify-private',
+                'ugc-image-upload',
             ],
             'auto_refresh' => true,
             'return_assoc' => true
@@ -104,5 +106,30 @@ class ApiController extends Controller
         ];
 
         Song::store($song_data, $basket);
+    }
+
+    public function exportPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request, Basket $basket)
+    {
+        request()->validate([
+            'spotify_name' => 'required|string'
+        ]);
+
+        $api->setAccessToken(session()->get('access_token'));
+        $api->createPlaylist([
+            'name' => request()->spotify_name,
+            'public' => false
+        ]);
+
+        $response = $api->getRequest()->getLastResponse();
+        $playlist_id = $response['body']->id;
+
+        $songs = $basket->songs()->get();
+        $tracks = [];
+        foreach ($songs as $song) {
+            array_push($tracks, $song->track_id);
+        };
+
+        $api->addPlaylistTracks($playlist_id, $tracks);
+        return redirect()->route('baskets.index');
     }
 }
