@@ -17,7 +17,6 @@ class ApiController extends Controller
                 'playlist-read-private',
                 'user-read-private',
                 'playlist-modify-private',
-                'ugc-image-upload',
             ],
             'auto_refresh' => true,
             'return_assoc' => true
@@ -86,12 +85,13 @@ class ApiController extends Controller
         ]);
     }
 
-    public function importPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request)
+    public function importPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request, $basket)
     {
         $api->setAccessToken(session()->get('access_token'));
         foreach (request()->track_ids as $track_id) {
             $this->getSongData($api, $track_id, request()->basket);
         };
+        return redirect()->route('baskets.show', ['basket' => $basket]);
     }
 
     private function getSongData(SpotifyWebAPI\SpotifyWebAPI $api, string $track_id, $basket)

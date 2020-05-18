@@ -5,8 +5,8 @@
     <form method="POST" action="{{route('baskets.store')}}">
         @csrf
         <div class="form-group mt-4">
-            <label for="name">give it a name</label>
-            <input type="text" class="form-control" name="name" placeholder="Enter a name for the list">
+            <label for="name">give your new list a name</label>
+            <input type="text" class="form-control" name="name" placeholder="">
             @error('name')<p>{{ $errors->first('name') }}</p>@enderror
         </div>
         <div class="form-group">
@@ -34,8 +34,8 @@
         </div>
 
         <div class="form-group">
-            <label for="location">add a location</label>
-            <input type="text" class="form-control" name="location" placeholder=" enter city, region or country">
+            <label for="location">add a location or a festival name</label>
+            <input type="text" class="form-control" name="location" placeholder=" enter city, country or festival">
         </div>
 
         <div class="mt-6">

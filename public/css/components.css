@@ -58,6 +58,10 @@ h2 {
 .dropdown__label--underlined {
     text-decoration: underline;
 }
+
+.filter__link {
+    text-decoration: underline var(--secondary);
+}
 .edit__link {
     color: #ffffff;
     text-align: right;
@@ -127,7 +131,7 @@ h2 {
     top: 0;
     width: 10px;
     height: 18px;
-    border: solid white;
+    border: solid var(--primary);
     border-width: 0 3px 3px 0;
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);

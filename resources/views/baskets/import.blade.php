@@ -6,7 +6,7 @@
     <div class="container">
         <form method="POST" action=" {{ route('import', $basket) }}">
             @csrf
-            @method("PATCH")
+            @method("PUT")
             @foreach($songs as $song)
 
             <div class="row align-items-center">

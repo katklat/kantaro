@@ -25,7 +25,7 @@
                 <div class="dropdown__hidden">
                     <div class="dropdown__content">
                         <div class="form-group">
-                            <textarea class="form-control" rows="5" name="entry">{{ old('entry') ? $basket->entry : "say something about this list" }}</textarea>
+                            <textarea class="form-control" rows="5" name="entry" placeholder="say something about this list">{{ old('entry') ?? $basket->entry }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -40,10 +40,10 @@
                             <label for="month">edit month and year</label>
                             <div class="row">
                                 <div class="col-8">
-                                    <input type="month" class="form-control" name="month" value="{{ old('month') ? $basket->month : "enter month" }}">
+                                    <input type="month" class="form-control" name="month" placeholder="enter a month" value="{{ old('month') ?? $basket->month }}">
                                 </div>
                                 <div class="col-4">
-                                    <input <input type="integer" name="year" class="form-control" placeholder="year"> value="{{ old('year') ?? $basket->year }}">
+                                    <input <input type="integer" name="year" class="form-control" placeholder="year" value="{{ old('year') ?? $basket->year }}">
                                 </div>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                     <div class="dropdown__content">
 
                         <div class="form-group">
-                            <input type="text" class="form-control" name="location" value="{{ old('location') ? $basket->location : "add location"}}">
+                            <input type="text" class="form-control" name="location" placeholder="add a location or festival" value="{{ old('location') ?? $basket->location}}">
                         </div>
 
                     </div>

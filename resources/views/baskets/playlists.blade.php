@@ -22,6 +22,10 @@
         <hr>
         @endforeach
     </div>
+    <div class="mt-6">
+        <a class="btn btn_cancel ml-2 " href="{{ route('baskets.show',$basket) }}">Cancel</a>
+    </div>
+
 </main>
 
 @endsection
