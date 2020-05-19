@@ -17,11 +17,11 @@ use SpotifyWebAPI\SpotifyWebAPI;
 
 Route::get('/', 'SearchController@random')->name('home');
 Route::get('/search', 'SearchController@index')->name('search');
-Route::get('/baskets/{filter}', 'BasketController@indexFiltered');
+
 Route::resource('/songs', 'SongController');
 Route::resource('/baskets', 'BasketController');
 Route::get('/baskets/{basket}/tools', 'BasketController@tools')->name('tools');
-
+Route::get('/baskets/show/{filter}', 'BasketController@indexFiltered');
 
 Route::get('/auth', 'ApiController@authenticate');
 Route::get('/spoti', 'ApiController@callback');

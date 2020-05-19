@@ -11,7 +11,7 @@
             @endif
             @foreach($filters as $filter)
             @if($filter !== $selectedFilter)
-            <a class="py-2  d-md-inline-block text-white filter__link" href="{{ url('baskets', $filter) }}">{{ $filter }}</a>
+            <a class="py-2  d-md-inline-block text-white filter__link" href="{{ url("baskets/show/{$filter}") }}">{{ $filter }}</a>
             @endif
             @endforeach
         </div>
