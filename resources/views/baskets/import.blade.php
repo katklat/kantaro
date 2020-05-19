@@ -4,15 +4,14 @@
 <main>
     <h4 class="m-3 inline">Playlist cotent: </h4>
     <div class="container">
-        <form method="POST" action=" {{ route('import', $basket) }}">
+        <form method="POST" action=" {{ route('import') }}">
             @csrf
             @method("PUT")
-            @foreach($songs as $song)
 
+            @foreach($songs as $song)
             <div class="row align-items-center">
                 <div class="col-9">
                     <p class="m-0">{{ $song->track->name }} </br>by {{ $song->track->artists[0]->name }}</p>
-                    <input name="basket" type="hidden" value="{{ $basket }}">
                 </div>
                 <div class="col-3">
                     <label class="container__checkboxes">

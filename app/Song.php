@@ -24,8 +24,8 @@ class Song extends Model
         return 'https://lorempixum.com/400/200/nature/?87706';
     }
 
-    public static function store(array $song_data, $basket)
+    public static function store(array $song_data)
     {
-        Song::create($song_data)->baskets()->sync($basket);
+        Song::create($song_data)->baskets()->sync(session()->get('basket'));
     }
 }

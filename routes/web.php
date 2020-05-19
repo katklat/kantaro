@@ -28,7 +28,7 @@ Route::get('/spoti', 'ApiController@callback');
 Route::post('/songs/search/{type}', 'ApiController@search');
 Route::post('/baskets/search/{type}', 'ApiController@search');
 Route::get('/baskets/search/playlist', 'ApiController@renderPlaylistSongs')->name('getPlaylist');
-Route::put('/baskets/{basket}', 'ApiController@importPlaylist')->name('import');
+Route::put('/baskets', 'ApiController@importPlaylist')->name('import');
 Route::post('/baskets/{basket}', 'ApiController@exportPlaylist')->name('export');
 
 Route::get('/settings', function () {

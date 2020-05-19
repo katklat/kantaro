@@ -48,7 +48,8 @@ class ApiController extends Controller
                 return $this->renderSongs($results, $query);
                 break;
             case 'playlist':
-                return $this->renderPlaylists($results, $query, request()->basket);
+                session(['basket' => request()->basket]);
+                return $this->renderPlaylists($results, $query);
                 break;
         }
     }
@@ -63,14 +64,13 @@ class ApiController extends Controller
         ]);
     }
 
-    private function renderPlaylists(object $results, string $query, $basket)
+    private function renderPlaylists(object $results, string $query)
     {
         $lists = $results->playlists->items;
 
         return view('baskets.playlists', [
             'lists' => $lists,
             'query' => $query,
-            'basket' => $basket
         ]);
     }
 
@@ -78,23 +78,24 @@ class ApiController extends Controller
     {
         $api->setAccessToken(session()->get('access_token'));
         $songs = $api->getPlaylistTracks(request()->playlist_id)->items;
-        $basket = request()->basket;
+
         return view('baskets.import', [
-            'songs' => $songs,
-            'basket' => $basket
+            'songs' => $songs
+
         ]);
     }
 
-    public function importPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request, $basket)
+    public function importPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request)
     {
         $api->setAccessToken(session()->get('access_token'));
         foreach (request()->track_ids as $track_id) {
             $this->getSongData($api, $track_id, request()->basket);
         };
-        return redirect()->route('baskets.show', ['basket' => $basket]);
+
+        return redirect()->route('baskets.show', ['basket' => session()->get('basket')]);
     }
 
-    private function getSongData(SpotifyWebAPI\SpotifyWebAPI $api, string $track_id, $basket)
+    private function getSongData(SpotifyWebAPI\SpotifyWebAPI $api, string $track_id)
     {
         $track = $api->getTrack($track_id);
 
@@ -105,7 +106,7 @@ class ApiController extends Controller
             'artist_id' => $track->artists[0]->id
         ];
 
-        Song::store($song_data, $basket);
+        Song::store($song_data);
     }
 
     public function exportPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request, Basket $basket)

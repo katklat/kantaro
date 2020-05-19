@@ -18,6 +18,7 @@
                             <input type="text" class="form-control" name="spotify_name" placeholder="Enter name" value="{{ old('name') ?? $basket->name }}">
                             @error('spotify_name')<p>{{ $errors->first('spotify_name') }}</p>@enderror
                             <p class="mt-3">This upload will create a new private playlist within your Spotify account using the song titles. It will not share photos and other information from this app. </p>
+                            <a class="btn btn_cancel" href="{{ route('baskets.index') }}">Cancel</a>
                             <button type="submit" class="btn  btn_save">Create playlist</button>
                         </div>
                     </form>
