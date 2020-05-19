@@ -10,9 +10,9 @@ class Song extends Model
 {
     protected $fillable = ['title', 'artist', 'entry', 'track_id', 'artist_id', 'image', 'emoji'];
 
-    public function baskets()
+    public function books()
     {
-        return $this->belongsToMany('App\Basket');
+        return $this->belongsToMany('App\Book');
     }
 
     public function imageUrl($value)
@@ -26,6 +26,6 @@ class Song extends Model
 
     public static function store(array $song_data)
     {
-        Song::create($song_data)->baskets()->sync(session()->get('basket'));
+        Song::create($song_data)->books()->sync(session()->get('book'));
     }
 }

@@ -19,18 +19,27 @@ Route::get('/', 'SearchController@random')->name('home');
 Route::get('/search', 'SearchController@index')->name('search');
 
 Route::resource('/songs', 'SongController');
-Route::resource('/baskets', 'BasketController');
-Route::get('/baskets/{basket}/tools', 'BasketController@tools')->name('tools');
-Route::get('/baskets/show/{filter}', 'BasketController@indexFiltered');
+// Route::resource('/baskets', 'BasketController');
+// Route::get('/baskets/{basket}/tools', 'BasketController@tools')->name('tools');
+// Route::get('/baskets/show/{filter}', 'BasketController@indexFiltered');
+
+Route::resource('/books', 'BookController');
+Route::get('/books/{book}/tools', 'BookController@tools')->name('tools');
+Route::get('/books/show/{filter}', 'BookController@indexFiltered');
 
 Route::get('/auth', 'ApiController@authenticate');
 Route::get('/spoti', 'ApiController@callback');
 Route::post('/songs/search/{type}', 'ApiController@search');
-Route::post('/baskets/search/{type}', 'ApiController@search');
-Route::get('/baskets/search/playlist', 'ApiController@renderPlaylistSongs')->name('getPlaylist');
-Route::put('/baskets', 'ApiController@importPlaylist')->name('import');
-Route::post('/baskets/{basket}', 'ApiController@exportPlaylist')->name('export');
+Route::post('/books/search/{type}', 'ApiController@search');
+Route::get('/books/search/playlist', 'ApiController@renderPlaylistSongs')->name('getPlaylist');
+Route::put('/books', 'ApiController@importPlaylist')->name('import');
+Route::post('/books/{book}', 'ApiController@exportPlaylist')->name('export');
 
 Route::get('/settings', function () {
     return view('settings');
 })->name('settings');
+
+// Route::post('/baskets/search/{type}', 'ApiController@search');
+// Route::get('/baskets/search/playlist', 'ApiController@renderPlaylistSongs')->name('getPlaylist');
+// Route::put('/baskets', 'ApiController@importPlaylist')->name('import');
+// Route::post('/baskets/{basket}', 'ApiController@exportPlaylist')->name('export');

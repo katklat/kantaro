@@ -3,8 +3,8 @@
         <div class="container d-flex">
 
             <a href="{{ url()->previous() }}"> <img src={{ asset('images/back.svg') }} class="filter-secondary inline" width="48" height="48" title="add" alt=""></a>
-            @if (Request::is('*baskets'))
-            <a href="{{ route('baskets.create') }}"> <img src={{ asset('images/plus.svg') }} class="filter-secondary inline mt-2 mr-2" width="32" height="32" title="add" alt=""></a>
+            @if (Request::is('*books'))
+            <a href="{{ route('books.create') }}"> <img src={{ asset('images/plus.svg') }} class="filter-secondary inline mt-2 mr-2" width="32" height="32" title="add" alt=""></a>
             @else
             <a href="{{ route('songs.create') }}"> <img src={{ asset('images/plus.svg') }} class="filter-secondary inline mt-2 mr-2" width="32" height="32" title="add" alt=""></a>
             @endif

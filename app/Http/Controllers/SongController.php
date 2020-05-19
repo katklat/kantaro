@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Song;
 use Illuminate\Http\Request;
-use App\Basket;
+use App\Book;
 
 class SongController extends Controller
 {
@@ -66,8 +66,8 @@ class SongController extends Controller
     {
         return view('songs/edit', [
             'song' => $song,
-            'baskets' => Basket::all(),
-            'selectedBaskets' => $song->baskets
+            'books' => Book::all(),
+            'selectedBooks' => $song->books
         ]);
     }
 
@@ -86,7 +86,7 @@ class SongController extends Controller
             $data['image'] = $path;
         }
         $song->update($data);
-        $song->baskets()->sync($request->input('baskets'));
+        $song->books()->sync($request->input('books'));
 
         return redirect()->route('songs.show', ['song' => $song]);
     }
@@ -120,7 +120,7 @@ class SongController extends Controller
             'entry' => 'nullable',
             'emoji' => 'nullable',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'basket' => 'exists: baskets,id',
+            'book' => 'exists: books,id',
         ]);
     }
 }
