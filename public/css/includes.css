@@ -1,11 +1,11 @@
 .header {
     background: var(--primary);
+    border-bottom: var(--secondary) solid 3px;
 }
-.header-dark {
-    color: var(--primary);
-}
+
 .nav {
     background: var(--primary);
+    border-top: var(--secondary) solid 3px;
 }
 .nav-link {
     color: #ffffff;

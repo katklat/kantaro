@@ -8,8 +8,7 @@
             <div class="card-body card-scroll text-left ">
                 <div class="row">
                     <div class="col-9">
-                        <h4 class="card-title">{{ $basket->name }}
-                            <h4>
+                        <h4 class="card-title">{{ $basket->name }}</h4>
                     </div>
                     <div class="col-1 pl-1">
                         <a href="{{ route('tools', $basket) }}">
@@ -22,7 +21,7 @@
                         </a>
                     </div>
                 </div>
-                <h6 class="card-subtitle mb-2">{{ $basket->month }} {{ $basket->year }}, {{ $basket->location }}</h6>
+                <h6 class="card-subtitle mb-2">{{ $basket->month }} {{ $basket->year }}@if ($basket->location), {{ $basket->location }} @endif</h6>
                 <p class="card-text">{{ $basket->entry }}</p>
             </div>
             <div class="card-footer p-0 justify-content-around">

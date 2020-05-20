@@ -2,12 +2,9 @@
 
 namespace App;
 
-
-
-
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+
 
 class Song extends Model
 {
@@ -25,5 +22,10 @@ class Song extends Model
         }
 
         return 'https://lorempixum.com/400/200/nature/?87706';
+    }
+
+    public static function store(array $song_data)
+    {
+        Song::create($song_data)->baskets()->sync(session()->get('basket'));
     }
 }

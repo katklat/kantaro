@@ -1,5 +1,6 @@
 <?php
 
+//use App\Http\Controllers\BasketController;
 use Illuminate\Support\Facades\Route;
 use SpotifyWebAPI\SpotifyWebAPI;
 
@@ -17,17 +18,18 @@ use SpotifyWebAPI\SpotifyWebAPI;
 Route::get('/', 'SearchController@random')->name('home');
 Route::get('/search', 'SearchController@index')->name('search');
 
-Route::resource('/baskets', 'BasketController');
 Route::resource('/songs', 'SongController');
+Route::resource('/baskets', 'BasketController');
+Route::get('/baskets/{basket}/tools', 'BasketController@tools')->name('tools');
+Route::get('/baskets/show/{filter}', 'BasketController@indexFiltered');
 
 Route::get('/auth', 'ApiController@authenticate');
 Route::get('/spoti', 'ApiController@callback');
 Route::post('/songs/search/{type}', 'ApiController@search');
 Route::post('/baskets/search/{type}', 'ApiController@search');
-
-Route::get('/baskets/{basket}/tools', function () {
-    return view('baskets.tools');
-})->name('tools');
+Route::get('/baskets/search/playlist', 'ApiController@renderPlaylistSongs')->name('getPlaylist');
+Route::put('/baskets', 'ApiController@importPlaylist')->name('import');
+Route::post('/baskets/{basket}', 'ApiController@exportPlaylist')->name('export');
 
 Route::get('/settings', function () {
     return view('settings');

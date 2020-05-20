@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use SpotifyWebAPI;
-
+use App\Basket;
+use App\Song;
 
 class ApiController extends Controller
 {
@@ -14,7 +15,8 @@ class ApiController extends Controller
         $options = [
             'scope' => [
                 'playlist-read-private',
-                'user-read-private'
+                'user-read-private',
+                'playlist-modify-private',
             ],
             'auto_refresh' => true,
             'return_assoc' => true
@@ -46,6 +48,7 @@ class ApiController extends Controller
                 return $this->renderSongs($results, $query);
                 break;
             case 'playlist':
+                session(['basket' => request()->basket]);
                 return $this->renderPlaylists($results, $query);
                 break;
         }
@@ -58,17 +61,76 @@ class ApiController extends Controller
         return view('songs.create', [
             'songs' => $songs,
             'query' => $query
-
         ]);
     }
 
     private function renderPlaylists(object $results, string $query)
     {
-        $baskets = $results->playlists->items;
+        $lists = $results->playlists->items;
 
         return view('baskets.playlists', [
-            'baskets' => $baskets,
-            'query' => $query
+            'lists' => $lists,
+            'query' => $query,
         ]);
+    }
+
+    public function renderPlaylistSongs(SpotifyWebAPI\SpotifyWebAPI $api)
+    {
+        $api->setAccessToken(session()->get('access_token'));
+        $songs = $api->getPlaylistTracks(request()->playlist_id)->items;
+
+        return view('baskets.import', [
+            'songs' => $songs
+
+        ]);
+    }
+
+    public function importPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request)
+    {
+        $api->setAccessToken(session()->get('access_token'));
+        foreach (request()->track_ids as $track_id) {
+            $this->getSongData($api, $track_id, request()->basket);
+        };
+
+        return redirect()->route('baskets.show', ['basket' => session()->get('basket')]);
+    }
+
+    private function getSongData(SpotifyWebAPI\SpotifyWebAPI $api, string $track_id)
+    {
+        $track = $api->getTrack($track_id);
+
+        $song_data = [
+            'title' => $track->name,
+            'artist' => $track->artists[0]->name,
+            'track_id' => $track->id,
+            'artist_id' => $track->artists[0]->id
+        ];
+
+        Song::store($song_data);
+    }
+
+    public function exportPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request, Basket $basket)
+    {
+        request()->validate([
+            'spotify_name' => 'required|string'
+        ]);
+
+        $api->setAccessToken(session()->get('access_token'));
+        $api->createPlaylist([
+            'name' => request()->spotify_name,
+            'public' => false
+        ]);
+
+        $response = $api->getRequest()->getLastResponse();
+        $playlist_id = $response['body']->id;
+
+        $songs = $basket->songs()->get();
+        $tracks = [];
+        foreach ($songs as $song) {
+            array_push($tracks, $song->track_id);
+        };
+
+        $api->addPlaylistTracks($playlist_id, $tracks);
+        return redirect()->route('baskets.index');
     }
 }

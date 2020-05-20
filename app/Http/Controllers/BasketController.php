@@ -14,12 +14,27 @@ class BasketController extends Controller
      */
     public function index()
     {
+        $filters = ['travel', 'festival', 'other'];
         $orderBy = 'created_at';
         return view('baskets/index', [
+            'filters' => $filters,
+            'selectedFilter' => null,
             'baskets' => Basket::all()->sortByDesc($orderBy)
         ]);
     }
+    public function indexFiltered($filter)
+    {
+        $filters = ['travel', 'festival', 'other'];
+        $orderBy = 'created_at';
+        $baskets =  Basket::all()->where('occasion', $filter)->sortByDesc($orderBy);
 
+        return view('baskets/index', [
+            'baskets' => $baskets,
+            'filters' => $filters,
+            'selectedFilter' => $filter
+
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -76,10 +91,10 @@ class BasketController extends Controller
     public function update(Request $request, Basket $basket)
     {
         $data = $this->validateData();
-        // if ($request->has('image')) {
-        //     $path = $request->file('image')->store('/songs/images', 'public');
-        //     $data['image'] = $path;
-        // }
+        if ($request->has('image')) {
+            $path = $request->file('image')->store('/songs/images', 'public');
+            $data['image'] = $path;
+        }
         $basket->update($data);
 
         return redirect()->route('baskets.index');
