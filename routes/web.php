@@ -43,3 +43,7 @@ Route::get('/settings', function () {
 // Route::get('/baskets/search/playlist', 'ApiController@renderPlaylistSongs')->name('getPlaylist');
 // Route::put('/baskets', 'ApiController@importPlaylist')->name('import');
 // Route::post('/baskets/{basket}', 'ApiController@exportPlaylist')->name('export');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
