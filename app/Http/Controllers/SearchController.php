@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use SpotifyWebAPI;
 use Illuminate\Support\Facades\DB;
-use App\Basket;
+use App\Book;
 use App\Song;
 
 
@@ -15,7 +14,7 @@ class SearchController extends Controller
     {
         $query = request()->input('q');
 
-        $baskets = Basket::where('name', 'LIKE', "%$query%")
+        $books = Book::where('name', 'LIKE', "%$query%")
             ->orWhere('entry', 'LIKE', "%$query%")
             ->orWhere('location', 'LIKE', "%$query%")
             ->get();
@@ -26,7 +25,7 @@ class SearchController extends Controller
             ->get();
 
         return view('search', [
-            'baskets' => $baskets,
+            'books' => $books,
             'songs' => $songs,
             'query' => $query
         ]);

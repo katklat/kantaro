@@ -125,8 +125,9 @@ class BookController extends Controller
         return request()->validate([
             'name' => 'required',
             'occasion' => 'nullable',
+            'entry' => 'nullable',
             'month' => 'nullable',
-            'year' => 'nullable',
+            'year' => 'nullable|integer',
             'location' => 'nullable',
             'emoji' => 'nullable',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
