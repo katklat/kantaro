@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use SpotifyWebAPI;
 use App\Book;
 use App\Song;
-use SpotifyWebAPI\Session;
+
 
 class ApiController extends Controller
 {
@@ -36,7 +36,7 @@ class ApiController extends Controller
         session(['access_token' => $accessToken]);
         session(['refresh_token' => $refreshToken]);
 
-        return redirect('/');
+        return redirect('/home');
     }
 
     public function search(SpotifyWebAPI\SpotifyWebAPI $api, $type)
@@ -50,7 +50,9 @@ class ApiController extends Controller
                 return $this->renderSongs($results, $query);
                 break;
             case 'playlist':
-                session(['book' => request()->book]);
+                if (!session('book')) {
+                    session(['book' => request()->book]);
+                }
                 return $this->renderPlaylists($results, $query);
                 break;
         }
@@ -86,29 +88,18 @@ class ApiController extends Controller
 
         ]);
     }
-
-    public function importPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request)
+    public function importPlaylist()
     {
-        $api->setAccessToken(session()->get('access_token'));
-        foreach (request()->track_ids as $track_id) {
-            $this->getSongData($api, $track_id, request()->book);
-        };
-
-        return redirect()->route('books.show', ['book' => session()->get('book')]);
-    }
-
-    private function getSongData(SpotifyWebAPI\SpotifyWebAPI $api, string $track_id)
-    {
-        $track = $api->getTrack($track_id);
-
-        $song_data = [
-            'title' => $track->name,
-            'artist' => $track->artists[0]->name,
-            'track_id' => $track->id,
-            'artist_id' => $track->artists[0]->id
-        ];
-
-        Song::store($song_data);
+        //this is zipping the arrays from the request parameters
+        $songs_data = array_map(null, request()->titles, request()->artist_names, request()->track_ids,  request()->artist_ids);
+        //the loop checks if a hidden id is among the chosen songs
+        foreach ($songs_data as $song_data) {
+            if (in_array($song_data[2], request()->selected_ids))
+                Song::store($song_data);
+        }
+        $book = session('book');
+        session()->forget('book');
+        return redirect()->route('books.show', ['book' => $book]);
     }
 
     public function exportPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request, Book $book)
@@ -125,6 +116,8 @@ class ApiController extends Controller
 
         $response = $api->getRequest()->getLastResponse();
         $playlist_id = $response['body']->id;
+        $data['playlist_id'] = $playlist_id;
+        $book->update($data);
 
         $songs = $book->songs()->get();
         $tracks = [];

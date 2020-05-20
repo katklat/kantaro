@@ -15,7 +15,11 @@
                 </div>
                 <div class="col-3">
                     <label class="container__checkboxes">
-                        <input type="checkbox" name="track_ids[]" value="{{ $song->track->id }}" checked>
+                        <input type="checkbox" name="selected_ids[]" value="{{ $song->track->id }}" checked>
+                        <input type="hidden" name="track_ids[]" value="{{ $song->track->id }}">
+                        <input type="hidden" name="titles[]" value="{{ $song->track->name }}">
+                        <input type="hidden" name="artist_ids[]" value="{{ $song->track->artists[0]->id }}">
+                        <input type="hidden" name="artist_names[]" value="{{ $song->track->artists[0]->name }}">
                         <span class="checkmark"></span>
                     </label>
                 </div>

@@ -26,6 +26,12 @@ class Song extends Model
 
     public static function store(array $song_data)
     {
-        Song::create($song_data)->books()->sync(session()->get('book'));
+        $song = [
+            'title' => $song_data[0],
+            'artist' => $song_data[1],
+            'track_id' => $song_data[2],
+            'artist_id' => $song_data[3]
+        ];
+        Song::create($song)->books()->sync(session()->get('book'));
     }
 }
