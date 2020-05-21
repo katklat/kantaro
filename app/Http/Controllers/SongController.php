@@ -28,6 +28,9 @@ class SongController extends Controller
      */
     public function create()
     {
+        if (!session('book')) {
+            session(['book' => preg_replace('/[^0-9]/', '', url()->previous())]);
+        }
         return view('songs/search');
     }
 
@@ -40,8 +43,13 @@ class SongController extends Controller
     public function store(Request $request)
     {
         $data = $this->validateSongData();
-        Song::create($data);
-
+        $song = Song::create($data);
+        if (session('book')) {
+            $song->books()->sync(session('book'));
+            $book = session('book');
+            session()->forget('book');
+            return redirect()->route('books.show', ['book' => $book]);
+        }
         return redirect()->route('songs.index');
     }
 
@@ -108,7 +116,8 @@ class SongController extends Controller
             'title' => 'required',
             'artist' => 'required',
             'track_id' => 'nullable',
-            'artist_id' => 'nullable'
+            'artist_id' => 'nullable',
+            'book' => 'exists: books,id|nullable',
 
         ]);
     }
