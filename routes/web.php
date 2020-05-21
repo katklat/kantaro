@@ -22,7 +22,7 @@ Route::get('/search', 'SearchController@index')->name('search');
 Route::resource('/songs', 'SongController');
 Route::resource('/books', 'BookController');
 Route::get('/books/{book}/tools', 'BookController@tools')->name('tools');
-Route::get('/books/show/{filter}', 'BookController@indexFiltered');
+Route::get('/books/show/{filter}', 'BookController@index');
 
 Route::get('/auth', 'ApiController@authenticate');
 Route::get('/spoti', 'ApiController@callback');

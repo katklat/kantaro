@@ -4,17 +4,15 @@
 <main>
     <div class="container text-center">
 
-        <h2 class="m-3 inline">My {{ $selectedFilter ?? $selectedFilter}} books</h2>
-        <div class="container d-flex justify-content-between mb-3">
-            @if($selectedFilter)
-            <a class="py-2 d-md-inline-block text-white filter__link" href="{{ url('books') }}">all</a>
-            @endif
+        <h2 class="m-3 inline">My @if ($selectedFilter !== 'all') {{ $selectedFilter }} @endif books</h2>
+
+        <ul class="filter__list d-flex flex-row justify-content-between">
             @foreach($filters as $filter)
-            @if($filter !== $selectedFilter)
-            <a class="py-2  d-md-inline-block text-white filter__link" href="{{ url("books/show/{$filter}") }}">{{ $filter }}</a>
-            @endif
+            <li class=filter__item>
+                <a class="btn @if($filter==$selectedFilter){{'btn__filter--selected' }}@endif" role="button" href="{{ url("books/show/{$filter}") }}">{{ $filter }}</a>
+            </li>
             @endforeach
-        </div>
+        </ul>
 
         @foreach ($books as $book)
         <div>

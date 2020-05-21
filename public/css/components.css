@@ -35,6 +35,16 @@ h2 {
     background: var(--tertiary);
     color: #fff;
 }
+a.btn__filter--selected {
+    background: var(--tertiary);
+}
+.filter__list {
+    margin-left: -40px;
+}
+.filter__item {
+    list-style-type: none;
+}
+
 .tools__dropdown {
     padding: 1rem 1rem;
 }
@@ -59,9 +69,6 @@ h2 {
     text-decoration: underline;
 }
 
-.filter__link {
-    text-decoration: underline var(--secondary);
-}
 .edit__link {
     color: #ffffff;
     text-align: right;

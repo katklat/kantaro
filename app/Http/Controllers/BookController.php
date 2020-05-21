@@ -12,21 +12,16 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index($filter)
     {
-        $filters = ['travel', 'festival', 'other'];
+        $filters = ['all', 'travel', 'festival', 'other'];
         $orderBy = 'created_at';
-        return view('books/index', [
-            'filters' => $filters,
-            'selectedFilter' => null,
-            'books' => Book::all()->sortByDesc($orderBy)
-        ]);
-    }
-    public function indexFiltered($filter)
-    {
-        $filters = ['travel', 'festival', 'other'];
-        $orderBy = 'created_at';
-        $books =  Book::all()->where('occasion', $filter)->sortByDesc($orderBy);
+        if ($filter !== 'all') {
+            $books =  Book::all()->where('occasion', $filter)->sortByDesc($orderBy);
+        } else {
+            $books =  Book::all()->sortByDesc($orderBy);
+        }
 
         return view('books/index', [
             'books' => $books,
