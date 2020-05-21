@@ -13,7 +13,7 @@ class BookController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index($filter)
+    public function index($filter = 'all')
     {
         $filters = ['all', 'travel', 'festival', 'other'];
         $orderBy = 'created_at';

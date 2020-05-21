@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use SpotifyWebAPI;
 use App\Book;
 use App\Song;
@@ -108,6 +109,10 @@ class ApiController extends Controller
             'spotify_name' => 'required|string'
         ]);
 
+        if ($book->songs()->get()->isEmpty()) {
+            session()->flash('export', 'Please add some songs to the book before exporting');
+            return Redirect::back();
+        }
         $api->setAccessToken(session()->get('access_token'));
         $api->createPlaylist([
             'name' => request()->spotify_name,
@@ -126,6 +131,8 @@ class ApiController extends Controller
         };
 
         $api->addPlaylistTracks($playlist_id, $tracks);
-        return redirect()->route('books.index');
+        session()->flash('export', 'Spotify playlist was created');
+
+        return Redirect::back();
     }
 }

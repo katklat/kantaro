@@ -4,7 +4,9 @@
 <main>
 
     <section class="tools mt-3">
-
+        @if(session('export'))
+        <p class="message ml-3"> {{ session('export',' ')}} </p>
+        @endif
         <div class="tools__dropdown">
 
             <input id="tools__dropdown1" class="dropdown__toggle" type="checkbox">
