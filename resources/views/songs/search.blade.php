@@ -12,7 +12,7 @@
                     <form method="POST" class="form-inline" action="{{ url("/songs/search/track") }}">
                         @csrf
                         <div class="input-group input-group-append input-group-sm">
-                            <input name='q' type="text" size="500" class="form-control input__query ml-3" aria-label="Small" aria-describedby="inputGroup-sizing-md" placeholder="Search with Spotify...">
+                            <input name='q' type="text" size="500" autofocus class="form-control input__query ml-3" aria-label="Small" aria-describedby="inputGroup-sizing-md" placeholder="Search with Spotify...">
                             <button type="submit" class="btn">
                                 <img src="{{ asset('images/search.svg') }}" class="filter-secondary mr-2" width="28" height="28" title="search" alt="">
                             </button>

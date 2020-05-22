@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+Route::get('/', 'SearchController@random')->name('home');
 Route::get('/home', 'SearchController@random')->name('home');
 Route::get('/search', 'SearchController@index')->name('search');
 
@@ -24,8 +25,8 @@ Route::resource('/books', 'BookController');
 Route::get('/books/{book}/tools', 'BookController@tools')->name('tools');
 Route::get('/books/show/{filter}', 'BookController@index');
 
-Route::get('/auth', 'ApiController@authenticate');
-Route::get('/spoti', 'ApiController@callback');
+Route::get('/auth', 'ApiController@authenticate')->name('auth');
+Route::get('/spoti', 'ApiController@callback')->name('callback');
 Route::post('/songs/search/{type}', 'ApiController@search');
 Route::post('/books/search/{type}', 'ApiController@search');
 Route::get('/books/search/playlist', 'ApiController@renderPlaylistSongs')->name('getPlaylist');

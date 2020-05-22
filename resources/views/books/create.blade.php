@@ -6,7 +6,7 @@
         @csrf
         <div class="form-group mt-4">
             <label for="name">give your new book a name</label>
-            <input type="text" class="form-control" name="name" placeholder="">
+            <input type="text" autofocus class="form-control" name="name" placeholder="">
             @error('name')<p>{{ $errors->first('name') }}</p>@enderror
         </div>
         <div class="form-group">
