@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use SpotifyWebAPI;
-use App\Basket;
+use App\Book;
 use App\Song;
+
 
 class ApiController extends Controller
 {
@@ -28,13 +30,14 @@ class ApiController extends Controller
     public function callback(SpotifyWebAPI\Session $session)
     {
         $session->requestAccessToken(request()->input('code'));
+
         $accessToken = $session->getAccessToken();
         $refreshToken = $session->getRefreshToken();
 
         session(['access_token' => $accessToken]);
         session(['refresh_token' => $refreshToken]);
 
-        return redirect('/');
+        return redirect('/home');
     }
 
     public function search(SpotifyWebAPI\SpotifyWebAPI $api, $type)
@@ -48,7 +51,9 @@ class ApiController extends Controller
                 return $this->renderSongs($results, $query);
                 break;
             case 'playlist':
-                session(['basket' => request()->basket]);
+                if (!session('book')) {
+                    session(['book' => request()->book]);
+                }
                 return $this->renderPlaylists($results, $query);
                 break;
         }
@@ -68,7 +73,7 @@ class ApiController extends Controller
     {
         $lists = $results->playlists->items;
 
-        return view('baskets.playlists', [
+        return view('books.playlists', [
             'lists' => $lists,
             'query' => $query,
         ]);
@@ -79,42 +84,35 @@ class ApiController extends Controller
         $api->setAccessToken(session()->get('access_token'));
         $songs = $api->getPlaylistTracks(request()->playlist_id)->items;
 
-        return view('baskets.import', [
+        return view('books.import', [
             'songs' => $songs
 
         ]);
     }
-
-    public function importPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request)
+    public function importPlaylist()
     {
-        $api->setAccessToken(session()->get('access_token'));
-        foreach (request()->track_ids as $track_id) {
-            $this->getSongData($api, $track_id, request()->basket);
-        };
-
-        return redirect()->route('baskets.show', ['basket' => session()->get('basket')]);
+        //this is zipping the arrays from the request parameters
+        $songs_data = array_map(null, request()->titles, request()->artist_names, request()->track_ids,  request()->artist_ids);
+        //the loop checks if a hidden id is among the chosen songs
+        foreach ($songs_data as $song_data) {
+            if (in_array($song_data[2], request()->selected_ids))
+                Song::store($song_data);
+        }
+        $book = session('book');
+        session()->forget('book');
+        return redirect()->route('books.show', ['book' => $book]);
     }
 
-    private function getSongData(SpotifyWebAPI\SpotifyWebAPI $api, string $track_id)
-    {
-        $track = $api->getTrack($track_id);
-
-        $song_data = [
-            'title' => $track->name,
-            'artist' => $track->artists[0]->name,
-            'track_id' => $track->id,
-            'artist_id' => $track->artists[0]->id
-        ];
-
-        Song::store($song_data);
-    }
-
-    public function exportPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request, Basket $basket)
+    public function exportPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request, Book $book)
     {
         request()->validate([
             'spotify_name' => 'required|string'
         ]);
 
+        if ($book->songs()->get()->isEmpty()) {
+            session()->flash('export', 'Please add some songs to the book before exporting');
+            return Redirect::back();
+        }
         $api->setAccessToken(session()->get('access_token'));
         $api->createPlaylist([
             'name' => request()->spotify_name,
@@ -123,14 +121,18 @@ class ApiController extends Controller
 
         $response = $api->getRequest()->getLastResponse();
         $playlist_id = $response['body']->id;
+        $data['playlist_id'] = $playlist_id;
+        $book->update($data);
 
-        $songs = $basket->songs()->get();
+        $songs = $book->songs()->get();
         $tracks = [];
         foreach ($songs as $song) {
             array_push($tracks, $song->track_id);
         };
 
         $api->addPlaylistTracks($playlist_id, $tracks);
-        return redirect()->route('baskets.index');
+        session()->flash('export', 'Spotify playlist was created');
+
+        return Redirect::back();
     }
 }

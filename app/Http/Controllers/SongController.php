@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Song;
 use Illuminate\Http\Request;
-use App\Basket;
+use App\Book;
 
 class SongController extends Controller
 {
@@ -28,6 +28,9 @@ class SongController extends Controller
      */
     public function create()
     {
+        if (!session('book')) {
+            session(['book' => preg_replace('/[^0-9]/', '', url()->previous())]);
+        }
         return view('songs/search');
     }
 
@@ -40,8 +43,13 @@ class SongController extends Controller
     public function store(Request $request)
     {
         $data = $this->validateSongData();
-        Song::create($data);
-
+        $song = Song::create($data);
+        if (session('book')) {
+            $song->books()->sync(session('book'));
+            $book = session('book');
+            session()->forget('book');
+            return redirect()->route('books.show', ['book' => $book]);
+        }
         return redirect()->route('songs.index');
     }
 
@@ -66,8 +74,8 @@ class SongController extends Controller
     {
         return view('songs/edit', [
             'song' => $song,
-            'baskets' => Basket::all(),
-            'selectedBaskets' => $song->baskets
+            'books' => Book::all(),
+            'selectedBooks' => $song->books
         ]);
     }
 
@@ -86,7 +94,7 @@ class SongController extends Controller
             $data['image'] = $path;
         }
         $song->update($data);
-        $song->baskets()->sync($request->input('baskets'));
+        $song->books()->sync($request->input('books'));
 
         return redirect()->route('songs.show', ['song' => $song]);
     }
@@ -108,7 +116,8 @@ class SongController extends Controller
             'title' => 'required',
             'artist' => 'required',
             'track_id' => 'nullable',
-            'artist_id' => 'nullable'
+            'artist_id' => 'nullable',
+            'book' => 'exists: books,id|nullable',
 
         ]);
     }
@@ -120,7 +129,7 @@ class SongController extends Controller
             'entry' => 'nullable',
             'emoji' => 'nullable',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'basket' => 'exists: baskets,id',
+            'book' => 'exists: books,id',
         ]);
     }
 }

@@ -1,7 +1,7 @@
 <header>
     <div class="header fixed-top">
         <div class="container d-flex">
-            <form method="POST" class="form-inline my-2 my-lg-0" @if (Request::is('*/songs*')) action="{{ url("/songs/search/track") }}" @elseif (Request::is('*/baskets*')) action="{{ url("/baskets/search/playlist") }}" @endif>
+            <form method="POST" class="form-inline my-2 my-lg-0" @if (Request::is('*/songs*')) action="{{ url("/songs/search/track") }}" @elseif (Request::is('*/books*')) action="{{ url("/books/search/playlist") }}" @endif>
                 @csrf
                 <div class=" input-group input-group-sm">
                     <input name='q' type="text" class="form-control ml-4 mt-2" aria-label="Small" aria-describedby="inputGroup-sizing-sm" placeholder="Search with Spotify...">

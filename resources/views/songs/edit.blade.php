@@ -78,14 +78,14 @@
                 <div class="dropdown__content">
                     <div class="form-group">
                         <label class="control-label">select lists </label>
-                        <select multiple autocomplete="off" name="baskets[]" size="5" class="form-control @error('baskets') is-invalid @enderror">
-                            @foreach ($baskets as $basket)
-                            <option @if($selectedBaskets->contains($basket)) selected @endif
-                                value="{{ $basket->id }}">{{ $basket->name }}</option>
+                        <select multiple autocomplete="off" name="books[]" size="5" class="form-control @error('books') is-invalid @enderror">
+                            @foreach ($books as $book)
+                            <option @if($selectedBooks->contains($book)) selected @endif
+                                value="{{ $book->id }}">{{ $book->name }}</option>
                             @endforeach
                         </select>
-                        @error('baskets')
-                        <p class="invalid-feedback">{{ $errors->first('baskets') }}</p>
+                        @error('books')
+                        <p class="invalid-feedback">{{ $errors->first('books') }}</p>
                         @enderror
                     </div>
                 </div>

@@ -3,7 +3,7 @@
         <li class="nav-item">
             <a class="nav-link {{Request::is('*/') ? 'nav-link--selected' : ''}}" data-toggle=" tab" href="{{ route('home') }}">Home</a> </li>
         <li class="nav-item">
-            <a class="nav-link {{Request::is('baskets*') ? 'nav-link--selected' : ''}}" data-toggle="tab" href="{{ route('baskets.index') }}">Lists</a>
+            <a class="nav-link {{Request::is('books*') ? 'nav-link--selected' : ''}}" data-toggle="tab" href="{{ route('books.index') }}">Books</a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{Request::is('songs*') ? 'nav-link--selected' : ''}}" data-toggle="tab" href="{{ route('songs.index') }}">Songs</a>
