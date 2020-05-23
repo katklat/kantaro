@@ -4,6 +4,27 @@
 <main>
 
     <section class="tools mt-3">
+        <div class="tools__dropdown">
+            <form method="POST" action="{{ route('bookImage', $book->id) }}" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
+                <input id="tools__image" class="dropdown__toggle" type="checkbox">
+                <label for="tools__image" class="dropdown__label"><img src="{{ asset('images/image.svg') }}" class="filter-secondary inline mr-2" width="28" height="28" title="picture" alt="">Change book image</label>
+                <div class="dropdown__hidden">
+                    <div class="dropdown__content">
+                        <div class="input-group">
+                            <input onChange="checkFile()" name="image" type="file" accept=".png, .jpg, .jpeg, .gif, .svg" class="custom-file-input" id="inputFile" aria-describedby="inputGroupImage">
+                            <label class="custom-file-label" for="inputFile">choose image file</label>
+                        </div>
+                        <div class="mt-4 ">
+                            <a onClick="removeFile()" class="btn btn_cancel ml-2 " href="">Cancel</a>
+                            <button class="btn btn_save ml-2" type="submit">Upload</button>
+                            <button name='delete' onClick="removeFile()" class="btn btn_delete ml-2" type="submit">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
         <form method="POST" action="{{ route('books.update', $book->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
@@ -66,26 +87,6 @@
             </div>
 
             <div class="tools__dropdown">
-                <input id="tools__dropdown5" class="dropdown__toggle" type="checkbox">
-                <label for="tools__dropdown5" class="dropdown__label"><img src={{ asset('images/image.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Choose book picture</label>
-                <div class="dropdown__hidden">
-                    <div class="dropdown__content">
-                        <label for="group2">add or change the picture for this book</label>
-                        <div class="input-group" id="group2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="far fa-file-image"></i></span>
-                            </div>
-                            <div class="custom-file">
-                                <input name="image" type="file" id="inputFile" class="custom-file-input">
-                                <label class="custom-file-label" for="inputFile">choose file</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="tools__dropdown">
-
                 <input id="tools__dropdown6" class="dropdown__toggle" type="checkbox">
                 <label for="tools__dropdown6" class="dropdown__label"><img src={{ asset('images/emoji.svg') }} class="filter-secondary inline mr-1" width="28" height="28" title="add" alt="">Add emojis</label>
                 <div class="dropdown__hidden">
