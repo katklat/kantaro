@@ -8,6 +8,7 @@ use App\Policies\BookPolicy;
 use App\Book;
 
 
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -30,6 +31,10 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('bookCRUD', function ($user, $book) {
             return $user->id === $book->user_id;
+        });
+
+        Gate::define('songCRUD', function ($user, $song) {
+            return $user->id === $song->user_id;
         });
     }
 }
