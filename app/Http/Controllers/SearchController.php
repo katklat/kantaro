@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Book;
@@ -33,6 +34,11 @@ class SearchController extends Controller
 
     public function random()
     {
+
+        if (DB::table('songs')->count() == 0) {
+            session()->flash('empty', 'Here you could see a random song from your collection. There are no songs in your collection yet.');
+            return view('home');
+        }
         $randomSong = DB::table('songs')
             ->inRandomOrder()
             ->first();
