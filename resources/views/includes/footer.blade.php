@@ -9,7 +9,7 @@
             <a class="nav-link {{Request::is('songs*') ? 'nav-link--selected' : ''}}" data-toggle="tab" href="{{ route('songs.index') }}">Songs</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{Request::is('settings') ? 'nav-link--selected' : ''}}" data-toggle="tab" href="{{ route('settings') }}">Settings</a>
+            <a class="nav-link {{Request::is('profile') ? 'nav-link--selected' : ''}}" data-toggle="tab" href="{{ url('/profile') }}">Profile</a>
         </li>
     </ul>
 </footer>
