@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -50,6 +51,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $data = $this->validateData();
+        $data['user_id'] = Auth::user()->id;
 
         return redirect()->route('books.show', ['book' => Book::create($data)]);
     }

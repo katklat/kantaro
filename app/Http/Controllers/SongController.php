@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Song;
 use Illuminate\Http\Request;
 use App\Book;
@@ -43,6 +44,7 @@ class SongController extends Controller
     public function store(Request $request)
     {
         $data = $this->validateSongData();
+        $data['user_id'] = Auth::user()->id;
         $song = Song::create($data);
         if (session('book')) {
             $song->books()->sync(session('book'));
