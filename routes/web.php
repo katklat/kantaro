@@ -21,7 +21,7 @@ Route::prefix('/')->middleware('auth')->group(function () {
 
     Route::get('/', 'SearchController@random')->name('home');
     Route::get('/home', 'SearchController@random')->name('home');
-    Route::get('/search', 'SearchController@index')->name('search');
+    Route::get('/home/search', 'SearchController@index')->name('search');
 
     Route::resource('/songs', 'SongController');
     Route::patch('/songs/{song}/edit', 'SongController@updateImage')->name('songImage');

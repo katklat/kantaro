@@ -3,9 +3,6 @@
 
 <main>
     <div class="container text-center">
-        @guest
-        <h1>guest</h1>
-        @endguest
 
         @if(session('empty'))
         <p class="message ml-3 mt-3"> {{ session('empty',' ')}} </p>

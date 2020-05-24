@@ -16,7 +16,7 @@
 
 <body class="d-flex flex-column">
 
-    @if (Request::is('*/search*'))
+    @if (Request::is('/search*'))
     @include('includes/header_api')
 
     @else
