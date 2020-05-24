@@ -98,6 +98,21 @@ class SongController extends Controller
 
         return redirect()->route('songs.show', ['song' => $song]);
     }
+    public function updateImage(Request $request, Song $song)
+    {
+        if ($request->has('delete')) {
+            $data['image'] = '';
+            $song->update($data);
+        } else {
+            if (strlen($_FILES['image']['name']) > 0) {
+                $path = $request->file('image')->store('/songs/images', 'public');
+                $data['image'] = $path;
+                $song->update($data);
+            }
+        }
+
+        return redirect()->route('songs.show', ['song' => $song]);
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -128,7 +143,7 @@ class SongController extends Controller
             'artist' => 'required',
             'entry' => 'nullable',
             'emoji' => 'nullable',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable',
             'book' => 'exists: books,id',
         ]);
     }

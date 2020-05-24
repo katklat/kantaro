@@ -144,5 +144,9 @@ a.btn__filter--selected {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
-
 /* end checkbox styling*/
+
+.message {
+    color: #fff;
+    font-size: 1.2rem;
+}

@@ -7,13 +7,35 @@
     <section class="tools mt-3">
 
         <div class="tools__dropdown">
+            <form method="POST" action="{{ route('songImage', $song->id) }}" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
+                <input id="tools__image" class="dropdown__toggle" type="checkbox">
+                <label for="tools__image" class="dropdown__label"><img src="{{ asset('images/image.svg') }}" class="filter-secondary inline mr-2" width="28" height="28" title="picture" alt="">Change song image</label>
+                <div class="dropdown__hidden">
+                    <div class="dropdown__content">
+                        <div class="input-group">
+                            <input onChange="checkFile()" name="image" type="file" accept=".png, .jpg, .jpeg, .gif, .svg" class="custom-file-input" id="inputFile" aria-describedby="inputGroupImage">
+                            <label class="custom-file-label" for="inputFile">Choose image file</label>
+                        </div>
+                        <div class="mt-4 ">
+                            <a onClick="removeFile()" class="btn btn_cancel ml-2 " href="">Cancel</a>
+                            <button class="btn btn_save ml-2" type="submit">Upload</button>
+                            <button name='delete' onClick="removeFile()" class="btn btn_delete ml-2" type="submit">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="tools__dropdown">
             <input id="tools__dropdown1" class="dropdown__toggle" type="checkbox">
             <label for="tools__dropdown1" class="dropdown__label"><img src={{ asset('images/note.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="song" alt="">Edit title and artist</label>
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
                     <div class="form-group">
 
-                        <form method="POST" action="{{ route('songs.update', $song->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('songs.update', $song->id) }}">
                             @csrf
                             @method('PATCH')
 
@@ -33,6 +55,7 @@
                 </div>
             </div>
         </div>
+
         <div class="tools__dropdown">
             <input id="tools__dropdown2" class="dropdown__toggle" type="checkbox">
             <label for="tools__dropdown2" class="dropdown__label"><img src="{{ asset('images/text.svg') }}" class="filter-secondary inline mr-2" width="28" height="28" title="entry" alt="">Edit entry</label>
@@ -45,23 +68,9 @@
                 </div>
             </div>
         </div>
-
         <div class="tools__dropdown">
             <input id="tools__dropdown3" class="dropdown__toggle" type="checkbox">
-            <label for="tools__dropdown3" class="dropdown__label"><img src="{{ asset('images/image.svg') }}" class="filter-secondary inline mr-2" width="28" height="28" title="picture" alt="">Choose song picture</label>
-            <div class="dropdown__hidden">
-                <div class="dropdown__content">
-                    <div class="input-group">
-                        <input name="image" type="file" class="custom-file-input" id="inputFile" aria-describedby="inputGroupImage">
-                        <label class="custom-file-label" for="inputFile">Choose file</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="tools__dropdown">
-            <input id="tools__dropdown4" class="dropdown__toggle" type="checkbox">
-            <label for="tools__dropdown4" class="dropdown__label"><img src="{{ asset('images/emoji.svg') }}" class="filter-secondary inline mr-1" width="30" height="30" title="emoji" alt="">Add emojis</label>
+            <label for="tools__dropdown3" class="dropdown__label"><img src="{{ asset('images/emoji.svg') }}" class="filter-secondary inline mr-1" width="30" height="30" title="emoji" alt="">Add emojis</label>
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
                     <div class="form-group">
@@ -72,8 +81,8 @@
         </div>
         </div>
         <div class="tools__dropdown">
-            <input id="tools__dropdown5" class="dropdown__toggle" type="checkbox">
-            <label for="tools__dropdown5" class="dropdown__label"><img src="{{ asset('images/list.svg') }}" class="filter-secondary inline mr-1" width="30" height="30" title="emoji" alt="">Add this song to a list</label>
+            <input id="tools__dropdown4" class="dropdown__toggle" type="checkbox">
+            <label for="tools__dropdown4" class="dropdown__label"><img src="{{ asset('images/list.svg') }}" class="filter-secondary inline mr-1" width="30" height="30" title="emoji" alt="">Add this song to a list</label>
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
                     <div class="form-group">
@@ -96,12 +105,13 @@
             <button class="btn btn_save ml-2" type="submit">Save</button>
         </div>
         </form>
+
         <div class="tools__dropdown mt-4">
             <form method='POST' action="{{ route('songs.destroy', $song->id) }}">
                 @csrf
                 @method('DELETE')
-                <input id="tools__dropdown6" class="dropdown__toggle" type="checkbox">
-                <label for="tools__dropdown6" class="dropdown__label"><img src="{{ asset('images/delete.svg') }}" class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Delete song</label>
+                <input id="tools__delete" class="dropdown__toggle" type="checkbox">
+                <label for="tools__delete" class="dropdown__label"><img src="{{ asset('images/delete.svg') }}" class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Delete song</label>
                 <div class="dropdown__hidden">
                     <div class="dropdown__content">
                         <div class="form-group text-right">

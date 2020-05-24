@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/segmented-control.css') }}">
     <link rel="stylesheet" href="{{ asset('css/includes.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components.css') }}">
+    <script src="{{ asset('js/helper.js') }}" defer></script>
 </head>
 
 <body class="d-flex flex-column">
@@ -25,12 +26,5 @@
     @include('includes/footer')
 </body>
 
-<script>
-    document.querySelector('.custom-file-input').addEventListener('change', function(e) {
-        var fileName = document.getElementById("inputFile").files[0].name;
-        var nextSibling = e.target.nextElementSibling
-        nextSibling.innerText = fileName
-    })
-</script>
 
 </html>

@@ -1,8 +1,6 @@
 <?php
 
-//use App\Http\Controllers\BasketController;
 use Illuminate\Support\Facades\Route;
-use SpotifyWebAPI\SpotifyWebAPI;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -21,7 +19,9 @@ Route::get('/home', 'SearchController@random')->name('home');
 Route::get('/search', 'SearchController@index')->name('search');
 
 Route::resource('/songs', 'SongController');
+Route::patch('/songs/{song}/edit', 'SongController@updateImage')->name('songImage');
 Route::resource('/books', 'BookController');
+Route::patch('/books/{book}/edit', 'BookController@updateImage')->name('bookImage');
 Route::get('/books/{book}/tools', 'BookController@tools')->name('tools');
 Route::get('/books/show/{filter}', 'BookController@index');
 

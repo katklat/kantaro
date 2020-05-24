@@ -96,6 +96,22 @@ class BookController extends Controller
         return redirect()->route('books.index');
     }
 
+    public function updateImage(Request $request, Book $book)
+    {
+        if ($request->has('delete')) {
+            $data['image'] = '';
+            $book->update($data);
+        } else {
+            if (strlen($_FILES['image']['name']) > 0) {
+                $path = $request->file('image')->store('/books/images', 'public');
+                $data['image'] = $path;
+                $book->update($data);
+            }
+        }
+
+        return redirect()->route('books.show', ['book' => $book]);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -125,7 +141,7 @@ class BookController extends Controller
             'year' => 'nullable|integer',
             'location' => 'nullable',
             'emoji' => 'nullable',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable',
             'playlist_id' => 'nullable',
             'user_id' => 'nullable'
         ]);
