@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Gate;
 use SpotifyWebAPI;
 use App\Book;
 use App\Song;
+use SpotifyWebAPI\SpotifyWebAPIException as ApiException;
+
+
 
 
 class ApiController extends Controller
@@ -41,10 +44,24 @@ class ApiController extends Controller
         return redirect('/home');
     }
 
+    private function getToken($api)
+    {
+
+        try {
+            $api->setAccessToken(session()->get('access_token'));
+        } catch (\Exception $e) {
+            report($e);
+            dd($e);
+            return false;
+        }
+
+        return $api;
+    }
+
     public function search(SpotifyWebAPI\SpotifyWebAPI $api, $type)
     {
         $query = request()->input('q');
-        $api->setAccessToken(session()->get('access_token'));
+        $this->getToken($api);
         $results = $api->search($query, $type);
 
         switch ($type) {
@@ -59,6 +76,7 @@ class ApiController extends Controller
                 break;
         }
     }
+
 
     private function renderSongs(object $results, string $query)
     {
@@ -82,11 +100,12 @@ class ApiController extends Controller
 
     public function renderPlaylistSongs(SpotifyWebAPI\SpotifyWebAPI $api)
     {
-        $api->setAccessToken(session()->get('access_token'));
+        $this->getToken($api);
         $songs = $api->getPlaylistTracks(request()->playlist_id)->items;
 
         return view('books.import', [
             'songs' => $songs
+
         ]);
     }
     public function importPlaylist()
@@ -110,11 +129,11 @@ class ApiController extends Controller
                 'spotify_name' => 'required|string'
             ]);
 
-            if ($book->songs()->get()->isEmpty()) {
-                session()->flash('export', 'Please add some songs to the book before exporting');
+            if ($book->songs()->get()->where('track_id')->isEmpty()) {
+                session()->flash('export', "Looks like this book doesn't contain exportable songs. Search with Spotify to add songs and playlists.");
                 return Redirect::back();
             }
-            $api->setAccessToken(session()->get('access_token'));
+            $this->getToken($api);
             $api->createPlaylist([
                 'name' => request()->spotify_name,
                 'public' => false
@@ -125,14 +144,14 @@ class ApiController extends Controller
             $data['playlist_id'] = $playlist_id;
             $book->update($data);
 
-            $songs = $book->songs()->get();
+            $songs = $book->songs()->get()->where('track_id');
             $tracks = [];
             foreach ($songs as $song) {
                 array_push($tracks, $song->track_id);
             };
 
             $api->addPlaylistTracks($playlist_id, $tracks);
-            session()->flash('export', 'Spotify playlist was created');
+            session()->flash('export', 'Great! Now you can listen to your book on Spotify');
 
             return Redirect::back();
         }
