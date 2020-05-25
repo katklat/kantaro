@@ -15,17 +15,17 @@
 </head>
 
 <body class="d-flex flex-column">
+    @auth
 
     @if (Request::is('/search*'))
     @include('includes/header_api')
 
     @else
-    @auth
     @include('includes/header')
-    @endauth
+
     @endif
 
-
+    @endauth
     @yield('content')
     @auth
     @include('includes/footer')
