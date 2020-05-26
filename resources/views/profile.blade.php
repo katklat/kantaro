@@ -3,9 +3,9 @@
 
 <main>
 
-    <div class="tools__dropdown">
+    <div class="tools__dropdown mt-3">
         @if(session('defaultImage'))
-        <p class="message mt-3"> {{ session('defaultImage',' ')}} </p>
+        <p class="message mt-5"> {{ session('defaultImage',' ')}} </p>
         @endif
         <form method="POST" action="{{ route('defaultImage') }}" enctype="multipart/form-data">
             @csrf
@@ -26,11 +26,31 @@
                 </div>
             </div>
         </form>
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button class="btn btn_save ml-2"><i class="fa fa-sign-out fa-lg"></i> Logout</button>
-        </form>
-
     </div>
+    <hr>
+    <div class="tools__dropdown">
+        @if(session('defaultImage'))
+        <p class="message mt-5"> {{ session('defaultImage',' ')}} </p>
+        @endif
+
+        <input id="tools__1" class="dropdown__toggle" type="checkbox">
+        <label for="tools__1" class="dropdown__label"><img src="{{ asset('images/spotify.svg') }}" class="filter-secondary inline mr-2" width="28" height="28" title="picture" alt="">Link my Spotify account</label>
+        <div class="dropdown__hidden">
+            <div class="dropdown__content">
+                <div class="mt-4 ">
+                    <label for="now">Click here to get more information about the Spotify access.</label>
+                    <a class="btn btn_save mb-4" id="now" href="{{ route('auth') }}">Grant access now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button class="btn btn_delete mt-5"><i class="fa fa-sign-out fa-lg"></i> Logout</button>
+    </form>
+
+
 </main>
 @endsection

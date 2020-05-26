@@ -37,6 +37,9 @@ class SearchController extends Controller
 
     public function random()
     {
+        if (strpos(url()->previous(), 'register'))
+            return redirect()->route('welcome');
+
         $user = Auth::user()->id;
 
         if (DB::table('songs')->where('user_id', $user)->count() == 0) {
