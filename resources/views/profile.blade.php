@@ -4,7 +4,10 @@
 <main>
 
     <div class="tools__dropdown">
-        <form method="POST" action="" enctype="multipart/form-data">
+        @if(session('defaultImage'))
+        <p class="message mt-3"> {{ session('defaultImage',' ')}} </p>
+        @endif
+        <form method="POST" action="{{ route('defaultImage') }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <input id="tools__image" class="dropdown__toggle" type="checkbox">
@@ -12,7 +15,7 @@
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
                     <div class="input-group">
-                        <input onChange="checkFile()" name="image" type="file" accept=".png, .jpg, .jpeg, .gif, .svg" class="custom-file-input" id="inputFile" aria-describedby="inputGroupImage">
+                        <input onChange="checkFile()" name="defaultImage" type="file" accept=".png, .jpg, .jpeg, .gif, .svg" class="custom-file-input" id="inputFile" aria-describedby="inputGroupImage">
                         <label class="custom-file-label" for="inputFile">Choose image file</label>
                     </div>
                     <div class="mt-4 ">
