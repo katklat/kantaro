@@ -5,11 +5,20 @@
 
 .nav {
     background: var(--primary);
-    border-top: var(--secondary) solid 3px;
+    /* border-top: var(--secondary) solid 3px;
+ */
 }
 .nav-link {
     color: #ffffff;
 }
+
 .nav-link--selected {
     background: var(--secondary);
+}
+.nav__primary {
+    border-top: var(--secondary) solid 3px;
+}
+.nav__option {
+    color: #ffffff;
+    background: var(--tertiary);
 }
