@@ -24,10 +24,10 @@ class Book extends Model
     {
         if ($value) {
             return Storage::url($value);
-        } else {
-            $user_id = Auth::user()->id;
-            $profile = Profile::where('user_id', '=', "$user_id")->get()->toArray();
-            return Storage::url($profile[0]['defaultImage']);
-        }
+        } elseif (User::find(Auth::user()->id)->profile) {
+            $profile = User::find(Auth::user()->id)->profile;
+            if (strlen($profile->defaultImage) > 0)
+                return Storage::url($profile->defaultImage);
+        } else return null;
     }
 }

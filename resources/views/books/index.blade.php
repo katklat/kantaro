@@ -17,8 +17,11 @@
         @foreach ($books as $book)
         <div>
             <a href="{{ route('books.show', $book) }}" class="d-block rounded-lg mb-4 pb-1 bg-light text-decoration-none">
+                @if($book->image)
                 <img class="img-fluid rounded-top mb-3" src={{$book->imageUrl($book->image)}} />
-                <h4 class="text-dark  no-gutters ">{{ $book->name }}</h4>
+                @elseif($book->imageUrl($book->image))
+                <img class="img-fluid rounded-top mb-3" src={{$book->imageUrl($book->image)}} />
+                @endif <h4 class="text-dark  no-gutters ">{{ $book->name }}</h4>
             </a>
         </div>
         @endforeach

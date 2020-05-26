@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Book;
@@ -38,7 +37,6 @@ class SearchController extends Controller
 
     public function random()
     {
-
         $user = Auth::user()->id;
 
         if (DB::table('songs')->where('user_id', $user)->count() == 0) {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -39,8 +40,10 @@ Route::prefix('/')->middleware('auth')->group(function () {
     Route::put('/books', 'ApiController@importPlaylist')->name('import');
     Route::post('/books/{book}', 'ApiController@exportPlaylist')->name('export');
 
+
     Route::get('/profile', function () {
         return view('profile');
     })->name('profile');
+    Route::patch('/profile', 'ProfileController@storeImage')->name('defaultImage');
     //Route::get('/home', 'HomeController@index')->name('home');
 });

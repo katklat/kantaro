@@ -8,6 +8,7 @@ use App\Song;
 use Illuminate\Http\Request;
 use App\Book;
 
+
 class SongController extends Controller
 {
     /**
@@ -68,6 +69,7 @@ class SongController extends Controller
     public function show(Song $song)
     {
         if (Gate::allows('songCRUD', $song)) {
+
             return view('songs.show', ['song' => $song]);
         }
     }
