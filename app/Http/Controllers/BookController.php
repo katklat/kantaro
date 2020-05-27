@@ -157,7 +157,7 @@ class BookController extends Controller
             'year' => 'nullable|integer',
             'location' => 'nullable',
             'emoji' => 'nullable',
-            'image' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'playlist_id' => 'nullable',
             'user_id' => 'nullable'
         ]);
