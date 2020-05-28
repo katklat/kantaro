@@ -42,10 +42,15 @@
     </div>
     <hr>
 
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button class="btn btn_delete mt-5"><i class="fa fa-sign-out fa-lg"></i> Logout</button>
-    </form>
+    <div class="mt-5">
+        <form method="POST" action="{{ route('logout') }}" class="pb-5">
+            @csrf
+            <button class="btn btn_delete mb-5"><i class="fa fa-sign-out fa-lg"></i> Logout</button>
+        </form>
+        <div class="text-center pt-5 mt-4">
+            <a class=" nav-link link" href="{{ route('impressum') }}">About Kantaro</a>
+        </div>
+    </div>
 
 
 </main>

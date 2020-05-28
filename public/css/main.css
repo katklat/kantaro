@@ -33,3 +33,11 @@ hr {
     height: 1px;
     background-color: var(--secondary);
 }
+
+.about {
+    color: #999;
+}
+
+a.link {
+    text-decoration: underline;
+}

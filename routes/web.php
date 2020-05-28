@@ -50,3 +50,6 @@ Route::prefix('/')->middleware('auth')->group(function () {
 
     Route::patch('/profile', 'ProfileController@storeImage')->name('defaultImage');
 });
+Route::get('/impressum', function () {
+    return view('impressum');
+})->name('impressum');
