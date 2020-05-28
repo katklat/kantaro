@@ -1,14 +1,16 @@
 :root {
-    --primary: #30475e;
-    --secondary: #00909e;
-    --tertiary: #e43f5a;
+    --primary: #f8f3eb;
+    --secondary: #2fc4b2;
+    --tertiary: #f40552;
+    --quaternary: #fc7e2f;
 }
 
 html,
 body {
     display: grid;
     grid-template-rows: 48px auto 48px;
-    width: 100vw;
+    color: var(--secondary);
+    background: var(--primary);
 }
 main {
     padding: 52px 20px;
@@ -16,17 +18,9 @@ main {
     color: var(--secondary);
 }
 
-body {
-    background: var(--primary);
-}
-
-.filter-primary {
-    filter: invert(26%) sepia(6%) saturate(3150%) hue-rotate(170deg)
-        brightness(94%) contrast(93%);
-}
 .filter-secondary {
-    filter: invert(33%) sepia(85%) saturate(1127%) hue-rotate(153deg)
-        brightness(100%) contrast(101%);
+    filter: invert(66%) sepia(40%) saturate(645%) hue-rotate(123deg)
+        brightness(89%) contrast(97%);
 }
 .filter-white {
     filter: invert(100%);

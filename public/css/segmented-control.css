@@ -1,5 +1,6 @@
 #sc1 {
     width: 100%;
+    border: solid 2px var(--secondary);
 }
 .segmented-control {
     /*Controls the color of the non-selected elements*/
@@ -207,6 +208,7 @@
     -o-transition-timing-function: inherit;
     -webkit-transition-timing-function: inherit;
     transition-timing-function: inherit;
+    background-color: var(--primary);
 }
 .segmented-control > label:before,
 .segmented-control > label:after {
