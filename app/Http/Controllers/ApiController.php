@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 use SpotifyWebAPI;
 use App\Book;
@@ -86,7 +87,6 @@ class ApiController extends Controller
 
         return view('books.import', [
             'songs' => $songs
-
         ]);
     }
     public function importPlaylist()
@@ -103,36 +103,38 @@ class ApiController extends Controller
         return redirect()->route('books.show', ['book' => $book]);
     }
 
-    public function exportPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Request $request, Book $book)
+    public function exportPlaylist(SpotifyWebAPI\SpotifyWebAPI $api, Book $book)
     {
-        request()->validate([
-            'spotify_name' => 'required|string'
-        ]);
+        if (Gate::allows('bookCRUD', $book)) {
+            request()->validate([
+                'spotify_name' => 'required|string'
+            ]);
 
-        if ($book->songs()->get()->isEmpty()) {
-            session()->flash('export', 'Please add some songs to the book before exporting');
+            if ($book->songs()->get()->isEmpty()) {
+                session()->flash('export', 'Please add some songs to the book before exporting');
+                return Redirect::back();
+            }
+            $api->setAccessToken(session()->get('access_token'));
+            $api->createPlaylist([
+                'name' => request()->spotify_name,
+                'public' => false
+            ]);
+
+            $response = $api->getRequest()->getLastResponse();
+            $playlist_id = $response['body']->id;
+            $data['playlist_id'] = $playlist_id;
+            $book->update($data);
+
+            $songs = $book->songs()->get();
+            $tracks = [];
+            foreach ($songs as $song) {
+                array_push($tracks, $song->track_id);
+            };
+
+            $api->addPlaylistTracks($playlist_id, $tracks);
+            session()->flash('export', 'Spotify playlist was created');
+
             return Redirect::back();
         }
-        $api->setAccessToken(session()->get('access_token'));
-        $api->createPlaylist([
-            'name' => request()->spotify_name,
-            'public' => false
-        ]);
-
-        $response = $api->getRequest()->getLastResponse();
-        $playlist_id = $response['body']->id;
-        $data['playlist_id'] = $playlist_id;
-        $book->update($data);
-
-        $songs = $book->songs()->get();
-        $tracks = [];
-        foreach ($songs as $song) {
-            array_push($tracks, $song->track_id);
-        };
-
-        $api->addPlaylistTracks($playlist_id, $tracks);
-        session()->flash('export', 'Spotify playlist was created');
-
-        return Redirect::back();
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class BookController extends Controller
 {
@@ -15,19 +17,24 @@ class BookController extends Controller
 
     public function index($filter = 'all')
     {
+        $user = Auth::user()->id;
         $filters = ['all', 'travel', 'festival', 'other'];
         $orderBy = 'created_at';
         if ($filter !== 'all') {
-            $books =  Book::all()->where('occasion', $filter)->sortByDesc($orderBy);
+            $books =  Book::all()
+                ->where('occasion', $filter)
+                ->where('user_id', $user)
+                ->sortByDesc($orderBy);
         } else {
-            $books =  Book::all()->sortByDesc($orderBy);
+            $books =  Book::all()
+                ->where('user_id', $user)
+                ->sortByDesc($orderBy);
         }
 
         return view('books/index', [
             'books' => $books,
             'filters' => $filters,
             'selectedFilter' => $filter
-
         ]);
     }
 
@@ -50,6 +57,7 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $data = $this->validateData();
+        $data['user_id'] = Auth::user()->id;
 
         return redirect()->route('books.show', ['book' => Book::create($data)]);
     }
@@ -62,8 +70,10 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        $songs = $book->songs()->get();
-        return view('books.show', ['book' => $book, 'songs' => $songs]);
+        if (Gate::allows('bookCRUD', $book)) {
+            $songs = $book->songs()->get();
+            return view('books.show', ['book' => $book, 'songs' => $songs]);
+        }
     }
 
     /**
@@ -74,7 +84,9 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return view('books.edit', ['book' => $book]);
+        if (Gate::allows('bookCRUD', $book)) {
+            return view('books.edit', ['book' => $book]);
+        }
     }
 
     /**
@@ -120,15 +132,19 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        $book->delete();
-        return redirect()->route('books.index');
+        if (Gate::allows('bookCRUD', $book)) {
+            $book->delete();
+            return redirect()->route('books.index');
+        }
     }
 
     public function tools(Book $book)
     {
-        return view('books/tools', [
-            'book' => $book
-        ]);
+        if (Gate::allows('bookCRUD', $book)) {
+            return view('books/tools', [
+                'book' => $book
+            ]);
+        }
     }
 
     private function validateData()

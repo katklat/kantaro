@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use App\Song;
 use Illuminate\Http\Request;
 use App\Book;
@@ -15,9 +17,12 @@ class SongController extends Controller
      */
     public function index()
     {
+        $user = Auth::user()->id;
         $orderBy = 'created_at';
         return view('songs/index', [
-            'songs' => Song::all()->sortByDesc($orderBy)
+            'songs' => Song::all()
+                ->where('user_id', $user)
+                ->sortByDesc($orderBy)
         ]);
     }
 
@@ -43,6 +48,7 @@ class SongController extends Controller
     public function store(Request $request)
     {
         $data = $this->validateSongData();
+        $data['user_id'] = Auth::user()->id;
         $song = Song::create($data);
         if (session('book')) {
             $song->books()->sync(session('book'));
@@ -61,7 +67,9 @@ class SongController extends Controller
      */
     public function show(Song $song)
     {
-        return view('songs.show', ['song' => $song]);
+        if (Gate::allows('songCRUD', $song)) {
+            return view('songs.show', ['song' => $song]);
+        }
     }
 
     /**
@@ -72,11 +80,13 @@ class SongController extends Controller
      */
     public function edit(Song $song)
     {
-        return view('songs/edit', [
-            'song' => $song,
-            'books' => Book::all(),
-            'selectedBooks' => $song->books
-        ]);
+        if (Gate::allows('songCRUD', $song)) {
+            return view('songs/edit', [
+                'song' => $song,
+                'books' => Book::all(),
+                'selectedBooks' => $song->books
+            ]);
+        }
     }
 
     /**
@@ -88,30 +98,36 @@ class SongController extends Controller
      */
     public function update(Request $request, Song $song)
     {
-        $data = $this->validateSongDetails();
-        if ($request->has('image')) {
-            $path = $request->file('image')->store('/songs/images', 'public');
-            $data['image'] = $path;
-        }
-        $song->update($data);
-        $song->books()->sync($request->input('books'));
+        if (Gate::allows('songCRUD', $song)) {
 
-        return redirect()->route('songs.show', ['song' => $song]);
+            $data = $this->validateSongDetails();
+            if ($request->has('image')) {
+                $path = $request->file('image')->store('/songs/images', 'public');
+                $data['image'] = $path;
+            }
+            $song->update($data);
+            $song->books()->sync($request->input('books'));
+
+            return redirect()->route('songs.show', ['song' => $song]);
+        }
     }
     public function updateImage(Request $request, Song $song)
     {
-        if ($request->has('delete')) {
-            $data['image'] = '';
-            $song->update($data);
-        } else {
-            if (strlen($_FILES['image']['name']) > 0) {
-                $path = $request->file('image')->store('/songs/images', 'public');
-                $data['image'] = $path;
-                $song->update($data);
-            }
-        }
+        if (Gate::allows('songCRUD', $song)) {
 
-        return redirect()->route('songs.show', ['song' => $song]);
+            if ($request->has('delete')) {
+                $data['image'] = '';
+                $song->update($data);
+            } else {
+                if (strlen($_FILES['image']['name']) > 0) {
+                    $path = $request->file('image')->store('/songs/images', 'public');
+                    $data['image'] = $path;
+                    $song->update($data);
+                }
+            }
+
+            return redirect()->route('songs.show', ['song' => $song]);
+        }
     }
     /**
      * Remove the specified resource from storage.
@@ -121,9 +137,11 @@ class SongController extends Controller
      */
     public function destroy(Song $song)
     {
-        $song->delete();
+        if (Gate::allows('songCRUD', $song)) {
+            $song->delete();
 
-        return redirect()->route('songs.index');
+            return redirect()->route('songs.index');
+        }
     }
     private function validateSongData()
     {
