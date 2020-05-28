@@ -36,6 +36,7 @@ Route::prefix('/')->middleware('auth')->group(function () {
     Route::post('/songs/search/{type}', 'ApiController@search');
     Route::post('/books/search/{type}', 'ApiController@search');
     Route::get('/books/search/playlist', 'ApiController@renderPlaylistSongs')->name('getPlaylist');
+    Route::get('/books/search/playlist/*', 'ApiController@reRender')->name('reRender');
     Route::put('/books', 'ApiController@importPlaylist')->name('import');
     Route::post('/books/{book}', 'ApiController@exportPlaylist')->name('export');
 

@@ -92,12 +92,21 @@ class ApiController extends Controller
     {
         $lists = $results->playlists->items;
 
+        session(['playlists' => $lists]);
+        session(['query' => $query]);
         return view('books.playlists', [
             'lists' => $lists,
             'query' => $query,
         ]);
     }
 
+    public function reRender()
+    {
+        return view('books.playlists', [
+            'lists' => session()->get('playlists'),
+            'query' => session()->get('query'),
+        ]);
+    }
     public function renderPlaylistSongs(SpotifyWebAPI\SpotifyWebAPI $api)
     {
         $this->getToken($api);
