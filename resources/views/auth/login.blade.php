@@ -33,7 +33,7 @@
                     <div class="utility">
                         <div class="animated-checkbox">
                             <label>
-                                <input name="remember" type="checkbox" d="remember" {{ old('remember') ? 'checked' : '' }}><span class="label-text">{{ __('Remember Me') }}</span>
+                                <input name="remember" type="checkbox" d="remember" {{ old('remember') ? 'checked' : '' }}><span class="label-text">{{ __('Remember me') }}</span>
                             </label>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                     <button type="submit" class="btn btn_save btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i> {{ __('Sign in') }}</button>
                 </div>
                 <div class="form-group mt-4">
-                    <p>Don't have an account? <a class="btn btn_cancel btn-block mt-2" href="{{route('register')}}">Sign Up</a> </p>
+                    <p class="message">Don't have an account? <a class="btn btn_cancel btn-block mt-2" href="{{route('register')}}">Sign Up</a> </p>
                 </div>
             </form>
         </div>

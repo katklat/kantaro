@@ -5,7 +5,7 @@
 
     <div class="tools__dropdown mt-3">
         @if(session('defaultImage'))
-        <p class="message mt-5"> {{ session('defaultImage',' ')}} </p>
+        <p class="message mt-3"> {{ session('defaultImage',' ')}} </p>
         @endif
         <form method="POST" action="{{ route('defaultImage') }}" enctype="multipart/form-data">
             @csrf
@@ -15,7 +15,7 @@
             <div class="dropdown__hidden">
                 <div class="dropdown__content">
                     <div class="input-group">
-                        <input onChange="checkFile()" name="defaultImage" type="file" accept=".png, .jpg, .jpeg, .gif, .svg" class="custom-file-input" id="inputFile" aria-describedby="inputGroupImage">
+                        <input onChange="checkFile()" name="defaultImage" id="inputFile" type="file" accept=".png, .jpg, .jpeg, .gif, .svg" class="custom-file-input" aria-describedby="inputGroupImage">
                         <label class="custom-file-label" for="inputFile">Choose image file</label>
                     </div>
                     <div class="mt-4 ">
@@ -29,10 +29,6 @@
     </div>
     <hr>
     <div class="tools__dropdown">
-        @if(session('defaultImage'))
-        <p class="message mt-5"> {{ session('defaultImage',' ')}} </p>
-        @endif
-
         <input id="tools__1" class="dropdown__toggle" type="checkbox">
         <label for="tools__1" class="dropdown__label"><img src="{{ asset('images/spotify.svg') }}" class="filter-secondary inline mr-2" width="28" height="28" title="picture" alt="">Link my Spotify account</label>
         <div class="dropdown__hidden">

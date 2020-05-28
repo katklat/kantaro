@@ -38,7 +38,7 @@
                         <div class="input-group input-group-append input-group-sm">
                             @csrf
                             <input name="q" type="text" class="form-control mt-2" aria-label="Small" aria-describedby="inputGroup-sizing-md" placeholder="Search playlist with Spotify...">
-                            <input name="book" type="hidden" value="{{ $book->id }}">
+                            <input type="hidden" name="book" value="{{ $book->id }}">
                             <button type="submit" class="btn">
                                 <img src="{{ asset('images/search.svg') }}" class="filter-secondary mr-2" width="28" height="28" title="search" alt="">
                             </button>
@@ -48,25 +48,6 @@
         </div>
         </div>
         <hr>
-        <div class="tools__dropdown">
-
-            <input id="tools__dropdown3" class="dropdown__toggle" type="checkbox">
-            <label for="tools__dropdown3" class="dropdown__label"><img src={{ asset('images/star.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Get recommendations</label>
-            <div class="dropdown__hidden">
-                <div class="dropdown__content">
-                    <div class="input-group input-group-append input-group-sm">
-                        <p class="mt-3">Get recommended playlists depending on the location or occasion of this book. </p>
-                        <a class="btn btn_save" href="#}">Show</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
 
     </section>
-
-
-
-</main>
-
-@endsection
+</main> @endsection

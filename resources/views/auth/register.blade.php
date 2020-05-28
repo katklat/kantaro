@@ -60,16 +60,19 @@
                     </div>
                 </div>
 
-                <div class="form-group row mb-0">
-                    <div class="col-md-6 offset-md-4">
+                <div class="form-group row">
+                    <div class="col-md-6 mb-0">
                         <button class="btn btn_save btn-block mt-4" type="submit" class="btn btn-primary">
                             {{ __('Register') }}
                         </button>
                     </div>
                 </div>
             </form>
+            <div class="text-center ">
+                <a class="message ml-2" href="{{ route('login') }}">Back to login</a>
+            </div>
         </div>
-        </>
+
     </div>
 </div>
 </div>

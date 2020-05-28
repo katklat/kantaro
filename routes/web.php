@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::prefix('/')->middleware('auth')->group(function () {
+
 
     Route::get('/', 'SearchController@random')->name('home');
     Route::get('/home', 'SearchController@random')->name('home');
@@ -44,6 +43,10 @@ Route::prefix('/')->middleware('auth')->group(function () {
     Route::get('/profile', function () {
         return view('profile');
     })->name('profile');
+
+    Route::get('/welcome', function () {
+        return view('welcome');
+    })->name('welcome');
+
     Route::patch('/profile', 'ProfileController@storeImage')->name('defaultImage');
-    //Route::get('/home', 'HomeController@index')->name('home');
 });
