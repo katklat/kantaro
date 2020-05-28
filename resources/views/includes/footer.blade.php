@@ -1,20 +1,20 @@
 <footer class="p-0 fixed-bottom">
     @if (Request::is('books') || Request::is('books/create'))
-    <ul class="nav nav-pills navbar-dark d-flex flex-row text-center justify-content-start">
+    <ul class="nav nav-pills nav__secondary navbar-dark d-flex flex-row text-center justify-content-end">
         <li class="nav-item">
             <a class="nav-link {{Request::is('books/create') ? 'nav-link--selected' : 'nav__option'}}" href="{{ route('books.create') }}">new Book</a>
         </li>
     </ul>
     @endif
     @if (Request::is('books/*') && !Request::is('books/*/*') && !Request::is('*create*'))
-    <ul class="nav nav-pills navbar-dark d-flex flex-row text-center justify-content-start">
+    <ul class="nav nav-pills nav__secondary navbar-dark d-flex flex-row text-center justify-content-end">
         <li class="nav-item">
             <a class="nav-link nav__option" data-toggle="tab" href="{{ route('songs.create') }}">add Song</a>
         </li>
     </ul>
     @endif
     @if (Request::is('songs')||Request::is('songs/create'))
-    <ul class="nav nav-pills navbar-dark d-flex flex-row text-center justify-content-end">
+    <ul class="nav nav-pills nav__secondary navbar-dark d-flex flex-row text-center justify-content-end">
         <li class="nav-item">
             <a class="nav-link {{Request::is('songs/create*') ? 'nav-link--selected' : 'nav__option'}}" data-toggle="tab" href="{{ route('songs.create') }}">new Song</a>
         </li>
