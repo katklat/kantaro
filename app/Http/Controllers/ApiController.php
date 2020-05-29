@@ -8,16 +8,12 @@ use Illuminate\Support\Facades\Gate;
 use SpotifyWebAPI;
 use App\Book;
 use App\Song;
-use SpotifyWebAPI\SpotifyWebAPIException as ApiException;
-
-
 
 
 class ApiController extends Controller
 {
     public function authenticate(SpotifyWebAPI\Session $session)
     {
-
         $options = [
             'scope' => [
                 'playlist-read-private',
@@ -31,38 +27,45 @@ class ApiController extends Controller
         return redirect($session->getAuthorizeUrl($options));
     }
 
-    public function callback(SpotifyWebAPI\Session $session)
+    public function callback(SpotifyWebAPI\Session $session, SpotifyWebAPI\SpotifyWebAPI $api)
     {
-        $session->requestAccessToken(request()->input('code'));
+        try {
 
-        $accessToken = $session->getAccessToken();
-        $refreshToken = $session->getRefreshToken();
-
-        session(['access_token' => $accessToken]);
-        session(['refresh_token' => $refreshToken]);
-
-        return redirect('/home');
+            $session->requestAccessToken(request()->input('code'));
+            $accessToken = $session->getAccessToken();
+            session(['access_token' => $accessToken]);
+            $this->getToken($api);
+        } catch (\Exception $e) {
+            return redirect()->route('profile');
+        }
+        return redirect()->route('home');
     }
 
     private function getToken($api)
     {
-
-        try {
-            $api->setAccessToken(session()->get('access_token'));
-        } catch (\Exception $e) {
-            report($e);
-            dd($e);
-            return false;
-        }
+        $api->setAccessToken(session()->get('access_token'));
 
         return $api;
     }
 
     public function search(SpotifyWebAPI\SpotifyWebAPI $api, $type)
     {
+
         $query = request()->input('q');
-        $this->getToken($api);
-        $results = $api->search($query, $type);
+        if ($query === null) {
+            session()->flash('empty', 'Please fill out the input field');
+            return Redirect::back();
+        }
+        session(['query' => $query]);
+        session(['type' => $type]);
+
+        try {
+            $this->getToken($api);
+            $results = $api->search($query, $type);
+        } catch (\Exception $e) {
+
+            return redirect()->route('auth');
+        }
 
         switch ($type) {
             case 'track':
@@ -142,12 +145,16 @@ class ApiController extends Controller
                 session()->flash('export', "Looks like this book doesn't contain exportable songs. Search with Spotify to add songs and playlists.");
                 return Redirect::back();
             }
-            $this->getToken($api);
-            $api->createPlaylist([
-                'name' => request()->spotify_name,
-                'public' => false
-            ]);
+            try {
+                $this->getToken($api);
+                $api->createPlaylist([
+                    'name' => request()->spotify_name,
+                    'public' => false
+                ]);
+            } catch (\Exception $e) {
 
+                return redirect()->route('auth');
+            }
             $response = $api->getRequest()->getLastResponse();
             $playlist_id = $response['body']->id;
             $data['playlist_id'] = $playlist_id;

@@ -19,7 +19,6 @@ Auth::routes();
 Route::prefix('/')->middleware('auth')->group(function () {
 
 
-    Route::get('/', 'SearchController@random')->name('home');
     Route::get('/home', 'SearchController@random')->name('home');
     Route::get('/home/search', 'SearchController@index')->name('search');
 
@@ -31,10 +30,12 @@ Route::prefix('/')->middleware('auth')->group(function () {
     Route::get('/books/{book}/tools', 'BookController@tools')->name('tools');
     Route::get('/books/show/{filter}', 'BookController@index');
 
+    Route::get('/', 'ApiController@authenticate')->name('auth');
     Route::get('/auth', 'ApiController@authenticate')->name('auth');
     Route::get('/spoti', 'ApiController@callback')->name('callback');
-    Route::post('/songs/search/{type}', 'ApiController@search');
-    Route::post('/books/search/{type}', 'ApiController@search');
+    Route::post('/songs/search/{type}', 'ApiController@search')->name('apiSearch');
+    Route::post('/books/search/{type}', 'ApiController@search')->name('apiSearch');
+
     Route::get('/books/search/playlist', 'ApiController@renderPlaylistSongs')->name('getPlaylist');
     Route::get('/books/search/playlist/*', 'ApiController@reRender')->name('reRender');
     Route::put('/books', 'ApiController@importPlaylist')->name('import');

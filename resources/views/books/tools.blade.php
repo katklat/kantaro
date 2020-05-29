@@ -29,7 +29,9 @@
         </div>
         <hr>
         <div class="tools__dropdown">
-
+            @if(session('empty'))
+            <p class="message"> {{ session('empty',' ')}} </p>
+            @endif
             <input id="tools__dropdown2" class="dropdown__toggle" type="checkbox">
             <label for="tools__dropdown2" class="dropdown__label"><img src={{ asset('images/download.svg') }} class="filter-secondary inline mr-2" width="28" height="28" title="add" alt="">Import playlist from Spotify</label>
             <div class="dropdown__hidden">

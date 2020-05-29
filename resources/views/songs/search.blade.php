@@ -6,7 +6,9 @@
     <section class="tools mt-3">
 
         <div class="tools__dropdown">
-
+            @if(session('empty'))
+            <p class="message ml-3"> {{ session('empty',' ')}} </p>
+            @endif
             <div class="dropdown__content">
                 <div class="form-group">
                     <form method="POST" class="form-inline" action="{{ url("/songs/search/track") }}">
