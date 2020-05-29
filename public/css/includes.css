@@ -5,11 +5,27 @@
 
 .nav {
     background: var(--primary);
-    border-top: var(--secondary) solid 3px;
 }
 .nav-link {
-    color: #ffffff;
+    color: var(--tertiary);
+    font-weight: bolder;
 }
+
 .nav-link--selected {
     background: var(--secondary);
+}
+
+.nav__primary {
+    border-top: var(--secondary) solid 3px;
+}
+
+.nav__secondary {
+    background: none;
+    margin-bottom: 8px;
+    margin-right: 8px;
+}
+
+.nav__option {
+    color: var(--primary);
+    background: var(--quaternary);
 }

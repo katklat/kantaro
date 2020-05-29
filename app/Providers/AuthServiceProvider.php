@@ -36,5 +36,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('songCRUD', function ($user, $song) {
             return $user->id === $song->user_id;
         });
+
+        Gate::define('profileCRUD', function ($user, $profile) {
+            return $user->id === $profile->user_id;
+        });
     }
 }

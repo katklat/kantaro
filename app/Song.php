@@ -20,9 +20,11 @@ class Song extends Model
     {
         if ($value) {
             return Storage::url($value);
-        }
-
-        return 'https://lorempixum.com/400/200/nature/?87706';
+        } elseif (User::find(Auth::user()->id)->profile) {
+            $profile = User::find(Auth::user()->id)->profile;
+            if (strlen($profile->defaultImage) > 0)
+                return Storage::url($profile->defaultImage);
+        } else return null;
     }
 
     public static function store(array $song_data)

@@ -15,9 +15,7 @@
                 </div>
                 <h6 class="card-subtitle text-muted pl-4 pb-2">{{ $song->artist }}</h6>
             </div>
-            @if ($song->image)
             <img class="card-img-top" src={{$song->imageUrl($song->image)}}>
-            @endif
             <p class="card-text card-scroll">{{ $song->entry }}
             </p>
 

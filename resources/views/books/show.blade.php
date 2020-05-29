@@ -4,7 +4,8 @@
 <main>
     <div class="container text-center">
 
-        <div class="card my-3">
+        <div class="card my-3  
+        @if($book->occasion=='travel'){{ 'd-block--travel' }}@elseif($book->occasion=='festival'){{ 'd-block--festival' }} @else{{ 'd-block--other' }}@endif">
             <div class="card-body card-scroll text-left ">
                 <div class="row">
                     <div class="col-9">
@@ -21,18 +22,22 @@
                         </a>
                     </div>
                 </div>
-                <h6 class="card-subtitle mb-2">{{ $book->month }} {{ $book->year }}@if ($book->location), {{ $book->location }} @endif</h6>
-                <p class="card-text">{{ $book->entry }}</p>
+                <h6 class="card-subtitle mb-2">{{ $book->month }} {{ $book->year }} {{ $book->location }}</h6>
+                <p class="card-text text-block">{{ $book->entry }}</p>
             </div>
-            <div class="card-footer p-0 justify-content-around">
+            <div class="card-footer p-0 justify-content-between">
                 <span class="card-icon inline mr-1">{{ $book->emoji }}</span>
             </div>
         </div>
 
         @foreach ($songs as $song)
-        <div class="card mb-4">
+        <div class="card mb-3">
             <a href="{{ route('songs.show', $song) }}">
-                <img class="card-img-top" src={{$song->imageUrl($song->image)}} alt="">
+                @if($song->image)
+                <img class="card-img-top" src={{$song->imageUrl($song->image)}} />
+                @elseif($song->imageUrl($song->image))
+                <img class="card-img-top" src={{$song->imageUrl($song->image)}} />
+                @endif
                 <div class="card-body text-left">
                     <div class="row">
                         <div class="col-9">

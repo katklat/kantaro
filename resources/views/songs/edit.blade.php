@@ -14,8 +14,8 @@
                 <label for="tools__image" class="dropdown__label"><img src="{{ asset('images/image.svg') }}" class="filter-secondary inline mr-2" width="28" height="28" title="picture" alt="">Change song image</label>
                 <div class="dropdown__hidden">
                     <div class="dropdown__content">
-                        <div class="input-group">
-                            <input onChange="checkFile()" name="image" type="file" accept=".png, .jpg, .jpeg, .gif, .svg" class="custom-file-input" id="inputFile" aria-describedby="inputGroupImage">
+                        <div class="input-group mb-2">
+                            <input onChange="checkFile()" name="image" id="inputFile" type="file" accept=".png, .jpg, .jpeg, .gif, .svg" class="custom-file-input" aria-describedby="inputGroupImage">
                             <label class="custom-file-label" for="inputFile">Choose image file</label>
                         </div>
                         <div class="mt-4 ">

@@ -17,7 +17,7 @@
                     <input name="artist_id" type="hidden" value="{{ $song->artists[0]->id }}">
                 </div>
                 <div class="col-3">
-                    <button class="btn btn_save ml-2" type="submit">add</button>
+                    <button class="btn btn_new ml-2" type="submit">add</button>
                 </div>
             </div>
         </form>

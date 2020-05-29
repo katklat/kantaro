@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class Book extends Model
 {
@@ -23,8 +24,10 @@ class Book extends Model
     {
         if ($value) {
             return Storage::url($value);
-        }
-
-        return 'https://lorempixum.com/400/200/nature/?87706';
+        } elseif (User::find(Auth::user()->id)->profile) {
+            $profile = User::find(Auth::user()->id)->profile;
+            if (strlen($profile->defaultImage) > 0)
+                return Storage::url($profile->defaultImage);
+        } else return null;
     }
 }

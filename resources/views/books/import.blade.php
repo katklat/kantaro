@@ -28,7 +28,7 @@
             @endforeach
 
             <div class="mt-6">
-                <a class="btn btn_cancel" href="{{ route('books.index') }}">Cancel</a>
+                <a class="btn btn_cancel" href="{{ route('reRender') }}">Back</a>
                 <button type="submit" class="btn ml-2 btn_save">Import </button>
             </div>
         </form>

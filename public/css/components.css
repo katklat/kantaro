@@ -1,5 +1,5 @@
 h2 {
-    color: #fff;
+    color: var(--quaternary);
 }
 
 .dropdown__toggle {
@@ -12,7 +12,7 @@ h2 {
 }
 .card-scroll {
     overflow-y: scroll;
-    height: 180px;
+    height: 188px;
     padding: 1rem;
 }
 .card-title,
@@ -20,29 +20,52 @@ h2 {
     color: var(--secondary);
 }
 
+.d-block--festival {
+    outline: dashed var(--quaternary) 6px;
+}
+
+.d-block--travel {
+    outline: outset var(--secondary) 6px;
+}
+
+.d-block--other {
+    outline: dotted var(--tertiary) 6px;
+}
+
 .btn {
     border: none;
-    color: #fff;
+    color: var(--primary);
+    font-weight: bolder;
 }
 .btn_save {
     background: var(--secondary);
 }
+
 .btn_cancel {
     background: #555;
-    color: #fff;
 }
 .btn_delete {
     background: var(--tertiary);
-    color: #fff;
 }
+
+.btn_new {
+    background: var(--quaternary);
+}
+
+a.btn__filter {
+    color: var(--secondary);
+    font-weight: bolder;
+}
+
 a.btn__filter--selected {
-    background: var(--tertiary);
+    background: var(--quaternary);
 }
 .filter__list {
     margin-left: -40px;
 }
 .filter__item {
     list-style-type: none;
+    font-weight: bolder;
 }
 
 .tools__dropdown {
@@ -70,13 +93,14 @@ a.btn__filter--selected {
 }
 
 .edit__link {
-    color: #ffffff;
+    color: var(--primary);
     text-align: right;
     padding: 10px 0;
 }
 .edit__h1 {
     font-size: 1rem;
-    color: #fff;
+    color: var(--quaternary);
+    font-weight: bold;
     padding-top: 12px;
     padding-left: 12px;
 }
@@ -113,12 +137,12 @@ a.btn__filter--selected {
     left: 0;
     height: 25px;
     width: 25px;
-    background-color: #eee;
+    background-color: #ddd;
     border-radius: 20px;
 }
 
 .container input:checked ~ .checkmark {
-    background-color: var(--tertiary);
+    background-color: var(--quaternary);
 }
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
@@ -145,8 +169,50 @@ a.btn__filter--selected {
     transform: rotate(45deg);
 }
 /* end checkbox styling*/
-
-.message {
+.login__container {
     color: #fff;
+}
+
+label {
+    color: var(--secondary);
+}
+label.control-label {
+    color: var(--secondary);
+}
+span.label-text {
+    color: var(--quaternary);
+    margin-left: 8px;
+}
+
+.logo {
+    color: var(--secondary);
+    font-style: italic;
+    font-family: "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.message {
+    color: var(--quaternary);
     font-size: 1.2rem;
+}
+
+input.form-control {
+    border: solid 2px var(--secondary);
+    background-color: var(--primary);
+}
+
+label.custom-file-label {
+    border: solid 2px var(--secondary);
+    background-color: var(--primary);
+}
+textarea.form-control {
+    border: solid 2px var(--secondary);
+    background-color: var(--primary);
+}
+select.form-control {
+    border: solid 2px var(--secondary);
+    background-color: var(--primary);
+}
+
+option.selected {
+    background-color: var(--secondary);
+    color: var(--secondary);
 }

@@ -8,6 +8,7 @@ use App\Song;
 use Illuminate\Http\Request;
 use App\Book;
 
+
 class SongController extends Controller
 {
     /**
@@ -68,6 +69,7 @@ class SongController extends Controller
     public function show(Song $song)
     {
         if (Gate::allows('songCRUD', $song)) {
+
             return view('songs.show', ['song' => $song]);
         }
     }
@@ -81,9 +83,10 @@ class SongController extends Controller
     public function edit(Song $song)
     {
         if (Gate::allows('songCRUD', $song)) {
+            $user = Auth::user()->id;
             return view('songs/edit', [
                 'song' => $song,
-                'books' => Book::all(),
+                'books' => Book::all()->where('user_id', $user),
                 'selectedBooks' => $song->books
             ]);
         }
@@ -161,7 +164,7 @@ class SongController extends Controller
             'artist' => 'required',
             'entry' => 'nullable',
             'emoji' => 'nullable',
-            'image' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'book' => 'exists: books,id',
         ]);
     }
