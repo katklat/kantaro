@@ -17,7 +17,7 @@ class SpotifyServiceProvider extends ServiceProvider
 
         $this->app->bind(SpotifyWebAPI\Session::class, function ($app) {
 
-            $redirect_uri = 'http://kantaro.test/spoti';
+            $redirect_uri = config('spotify.redirect_uri');
             $client_id = config('spotify.client_id');
             $client_secret = config('spotify.client_secret');
 
